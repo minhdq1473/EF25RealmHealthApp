@@ -16,8 +16,9 @@ class FourthVC: UIViewController {
         super.viewDidLoad()
         titleLabel.text = "What type of plan would you like to follow?"
         // Do any additional setup after loading the view.
+        navigationItem.hidesBackButton = true
         setupButton()
-        
+        collectionView.allowsMultipleSelection = true
         collectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -25,14 +26,22 @@ class FourthVC: UIViewController {
     
     func setupButton() {
         continueBtn.setTitle("Continue", for: .normal)
-        continueBtn.backgroundColor = .primary1
+        continueBtn.setTitleColor(.neutral5, for: .disabled)
+        continueBtn.backgroundColor = .neutral3
         continueBtn.tintColor = .neutral5
         continueBtn.layer.cornerRadius = 16
+        continueBtn.isEnabled = false
     }
     
 
     @IBAction func continueBtnTapped(_ sender: UIButton) {
+//        let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
+//        window?.rootViewController = TabBarCtrler()
         
+        let vc = TabBarCtrler()
+        navigationController?.setViewControllers([vc], animated: true)
+//        navigationItem.backBarButtonItem = nil
+        UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")
     }
     /*
     // MARK: - Navigation
@@ -53,10 +62,29 @@ extension FourthVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         let item = item3[indexPath.item]
-        cell.cellConfigure(title: item.title, image: item.image)
+        cell.configure(title: item.title, image: item.image)
         return cell
     }
 }
 extension FourthVC: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        updateButtonState()
+    }
     
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        updateButtonState()
+    }
+    
+    private func updateButtonState() {
+        let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
+        
+        if selectedCount > 0 {
+            continueBtn.isEnabled = true
+            continueBtn.backgroundColor = .primary1
+        } else {
+            continueBtn.isEnabled = false
+            continueBtn.backgroundColor = .neutral3
+        }
+    
+    }
 }

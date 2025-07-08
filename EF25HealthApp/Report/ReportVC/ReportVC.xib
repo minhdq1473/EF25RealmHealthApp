@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReportVC" customModule="EF25HealthApp" customModuleProvider="target">
+            <connections>
+                <outlet property="heartButton" destination="Vxc-Gv-pFB" id="6i2-js-vVI"/>
+                <outlet property="tableView" destination="gXn-VX-n0W" id="UzG-x4-U7j"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="69" translatesAutoresizingMaskIntoConstraints="NO" id="rdb-BY-n3w">
+                    <rect key="frame" x="16" y="183" width="361" height="567"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" pointerInteraction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vxc-Gv-pFB">
+                            <rect key="frame" x="37" y="0.0" width="287" height="198"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" image="full-heart"/>
+                            <connections>
+                                <action selector="heartButtonTapped:" destination="-1" eventType="touchUpInside" id="dCw-2w-8Bv"/>
+                            </connections>
+                        </button>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="gXn-VX-n0W">
+                            <rect key="frame" x="9" y="267" width="343" height="300"/>
+                            <color key="backgroundColor" name="Background"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="343" id="Afd-vI-Fnd"/>
+                                <constraint firstAttribute="height" constant="300" id="f8V-TH-3ER"/>
+                            </constraints>
+                        </tableView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" name="Background"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="rdb-BY-n3w" secondAttribute="bottom" constant="34" id="5qU-Uy-u8a"/>
+                <constraint firstItem="rdb-BY-n3w" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="796-r4-1Km"/>
+                <constraint firstItem="rdb-BY-n3w" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="65" id="ZJ6-de-2Yc"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rdb-BY-n3w" secondAttribute="trailing" constant="16" id="dlZ-Ne-PbN"/>
+            </constraints>
+            <point key="canvasLocation" x="-28.244274809160306" y="-12.67605633802817"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="full-heart" width="263" height="241"/>
+        <namedColor name="Background">
+            <color red="0.95686274509803926" green="0.96470588235294119" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

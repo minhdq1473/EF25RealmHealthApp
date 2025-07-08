@@ -9,7 +9,6 @@ import UIKit
 
 protocol ResultDelegate: AnyObject {
     func update(_ profile: Profile)
-    
 }
 
 //extension InformationVC: EditDelegate {
@@ -21,6 +20,7 @@ protocol ResultDelegate: AnyObject {
 class InformationVC: UIViewController {
     var delegate: ResultDelegate?
     var editingProfile: Profile?
+    var isEditingMode = false
     
     @IBOutlet weak var view1: CustomView!
     @IBOutlet weak var view2: CustomView!
@@ -33,32 +33,21 @@ class InformationVC: UIViewController {
         super.viewDidLoad()
         title = "Information"
 //        print("Editing profile: \(editingProfile?.fullName ?? "nil")")
-
-        view1.label.text = "First name"
-        view1.text.placeholder = "Enter first name"
-        view2.label.text = "Last name"
-        view2.text.placeholder = "Enter last name"
-        view3.label.text = "Weight"
-        view3.text.placeholder = "Kg"
-        view4.label.text = "Height"
-        view4.text.placeholder = "Cm"
+        setupButton()
+        setupTextField()
         
-        view1.view.layer.cornerRadius = 15
-        view2.view.layer.cornerRadius = 15
-        view3.view.layer.cornerRadius = 15
-        view4.view.layer.cornerRadius = 15
+//        view1.view.layer.cornerRadius = 15
+//        view2.view.layer.cornerRadius = 15
+//        view3.view.layer.cornerRadius = 15
+//        view4.view.layer.cornerRadius = 15
 //        firstName.layer.cornerRadius = 20
 //        lastName.layer.cornerRadius = 20
 //        kg.layer.cornerRadius = 20
 //        cm.layer.cornerRadius = 20
-        saveButton.layer.cornerRadius = 15
-        saveButton.backgroundColor = .neutral3
-        saveButton.isEnabled = false
         
-        view1.text.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        view2.text.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        view3.text.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        view4.text.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        // Do any additional setup after loading the view.
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonTapped))
+        navigationItem.leftBarButtonItem?.tintColor = .neutral2
         
         if let profile = editingProfile {
             view1.text.text = profile.firstName
@@ -69,10 +58,36 @@ class InformationVC: UIViewController {
             saveButton.isEnabled = true
             saveButton.backgroundColor = .primary1
         }
-        
-        // Do any additional setup after loading the view.
     }
     
+    func setupTextField() {
+        view1.label.text = "First name"
+        view1.text.placeholder = "Enter first name"
+        view2.label.text = "Last name"
+        view2.text.placeholder = "Enter last name"
+        view3.label.text = "Weight"
+        view3.text.placeholder = "Kg"
+        view4.label.text = "Height"
+        view4.text.placeholder = "Cm"
+        view1.text.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        view2.text.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        view3.text.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        view4.text.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+
+    }
+    func setupButton() {
+        saveButton.layer.cornerRadius = 16
+        saveButton.layer.masksToBounds = true
+        saveButton.backgroundColor = .neutral3
+        saveButton.isEnabled = false
+        saveButton.setTitleColor(.neutral5, for: .disabled)
+    }
+    @objc func backButtonTapped() {
+        navigationController?.popViewController(animated: true)
+        if !isEditingMode {
+            tabBarController?.isTabBarHidden = false
+        }
+    }
     @objc func textFieldDidChange(_ textField: UITextField) {
         let firstName = view1.text!
         let lastName = view2.text!
@@ -91,16 +106,16 @@ class InformationVC: UIViewController {
     @IBAction func saveButton(_ sender: UIButton) {
 //        let firstNameValue = firstName.text!
 //        let lastNameValue = lastName.text!
-        print("Save button tapped")
+//        print("Save button tapped")
 
         let firstName = view1.text!
         let lastName = view2.text!
         let kg = view3.text!
         let cm = view4.text!
-        print("First name: \(firstName.text ?? "nil")")
-        print("Last name: \(lastName.text ?? "nil")")
-        print("Weight: \(kg.text ?? "nil")")
-        print("Height: \(cm.text ?? "nil")")
+//        print("First name: \(firstName.text ?? "nil")")
+//        print("Last name: \(lastName.text ?? "nil")")
+//        print("Weight: \(kg.text ?? "nil")")
+//        print("Height: \(cm.text ?? "nil")")
         
         let firstNameValue: String = firstName.text!
         let lastNameValue: String = lastName.text!
@@ -112,7 +127,19 @@ class InformationVC: UIViewController {
         
         let profile = Profile(firstName: firstNameValue, lastName: lastNameValue, gender: genderValue, weight: kgValue, height: cmValue)
         delegate?.update(profile)
-        navigationController?.popViewController(animated: true)
+        
+        if UserDefaults.standard.bool(forKey: "hasProfile") == false {
+            UserDefaults.standard.set(true, forKey: "hasProfile")
+            let vc = ProfileVC()
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            navigationController?.popViewController(animated: true)
+        }
+        
+//        if UserDefaults.standard.bool(forKey: "hasProfile") == true {
+//            navigationController?.popViewController(animated: true)
+//        }
+//        tabBarController?.isTabBarHidden = false
     }
     
     /*

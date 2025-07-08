@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ThirdVC" customModule="EF25HealthApp" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FourthVC" customModule="EF25HealthApp" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="mSq-j6-QWK" id="k0D-gb-Ag6"/>
                 <outlet property="continueBtn" destination="IYR-nb-RdN" id="Jdo-EA-MnM"/>
@@ -33,7 +33,7 @@
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="mSq-j6-QWK">
                             <rect key="frame" x="0.0" y="55.333333333333343" width="362" height="438.66666666666663"/>
                             <color key="backgroundColor" name="Background"/>
-                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="16" id="1vr-Ac-rXb">
+                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="16" sectionInsetReference="layoutMargins" id="1vr-Ac-rXb">
                                 <size key="itemSize" width="164" height="195"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>

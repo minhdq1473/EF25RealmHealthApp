@@ -16,22 +16,31 @@ class SecondVC: UIViewController {
         super.viewDidLoad()
         titleLabel.text = "Which heart health issue concerns you the most?"
         // Do any additional setup after loading the view.
+        navigationItem.hidesBackButton = true
         setupButton()
-        
-        collectionView.register(UINib(nibName: "IntroCell", bundle: nil), forCellWithReuseIdentifier: "IntroCell")
+        collectionView.allowsMultipleSelection = true
+        collectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        
+        
     }
     
     func setupButton() {
-        continueBtn.backgroundColor = .primary
-        continueBtn.tintColor = .neutral5
+        continueBtn.setTitle("Continue", for: .normal)
         continueBtn.layer.cornerRadius = 16
+        continueBtn.isEnabled = false
+        continueBtn.setTitleColor(.neutral5, for: .disabled)
+        continueBtn.backgroundColor = .neutral3
+        continueBtn.tintColor = .neutral5
+        
     }
     
 
     @IBAction func continueBtnTapped(_ sender: UIButton) {
-        
+        let vc = ThirdVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     /*
     // MARK: - Navigation
@@ -50,12 +59,32 @@ extension SecondVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "IntroCell", for: indexPath) as! IntroCell
-        let item = items[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
+        let item = item1[indexPath.item]
         cell.configure(title: item.title, image: item.image)
         return cell
     }
 }
 extension SecondVC: UICollectionViewDelegate {
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        updateButtonState()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        updateButtonState()
+    }
+    
+    private func updateButtonState() {
+        let selectedCount = collectionView.indexPathsForSelectedItems?.count ?? 0
+        
+        if selectedCount > 0 {
+            continueBtn.isEnabled = true
+            continueBtn.backgroundColor = .primary1
+        } else {
+            continueBtn.isEnabled = false
+            continueBtn.backgroundColor = .neutral3
+        }
+    
+    }
 }

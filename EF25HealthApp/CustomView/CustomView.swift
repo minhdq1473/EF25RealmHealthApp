@@ -16,8 +16,9 @@ class CustomView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadFromNib()
-                
-//        view.layer.cornerRadius = 15
+        
+//        view.layer.cornerRadius = 16
+//        view.layer.masksToBounds = true
 //        backgroundColor = .background
         
 //        let avatar = UIImageView(image: UIImage(named: "Image"))
@@ -31,10 +32,14 @@ class CustomView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         loadFromNib()
+        
+        view.layer.cornerRadius = 16
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor(named: "neutral4")?.cgColor
     }
     
     override func layoutSubviews() {
-        
+        super.layoutSubviews()
     }
     
     private func loadFromNib() {

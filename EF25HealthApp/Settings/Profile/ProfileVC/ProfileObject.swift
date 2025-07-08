@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct Profile {
+struct Profile: Codable {
     let firstName: String
     let lastName: String
     let gender: String
@@ -18,18 +18,6 @@ struct Profile {
     var bmi: Double
     {
         weight / pow(height / 100, 2)
-    }
-    
-    func addProfile() {
-        
-    }
-    
-    func updateProfile(firstName: String,lastName: String, gender: String, weight: Double, height: Double) -> Profile {
-        Profile(firstName: firstName, lastName: lastName, gender: gender, weight: weight, height: height)
-    }
-    
-    func deleteProfile() -> Profile {
-        Profile(firstName: "", lastName: "", gender: "", weight: 0, height: 0)
     }
 
 }

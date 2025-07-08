@@ -16,8 +16,50 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        let window = UIWindow(windowScene: windowScene)
+        
+//        let tab1 = UINavigationController(rootViewController: ReportVC())
+//        let tab2 = UINavigationController(rootViewController: SettingsVC())
+//        tab1.tabBarItem = UITabBarItem(title: "Report", image: .chart, selectedImage: .coloredChart)
+//        tab1.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)], for: .normal)
+//        tab2.tabBarItem = UITabBarItem(title: "Settings", image: .setting, selectedImage: .coloredSetting)
+//        tab2.tabBarItem.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)], for: .normal)
+//        tabBarCtrler.viewControllers = [tab1, tab2]
+//        tabBarCtrler.tabBar.tintColor = .primary1
+//        tabBarCtrler.tabBar.backgroundColor = .neutral5
+//        tabBarCtrler.tabBar.layer.cornerRadius = 20
+//        tabBarCtrler.tabBar.layer.masksToBounds = true
+        
+        
+        
+        
+        let isFirstLaunch = !UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
+        if isFirstLaunch {
+            let introVC = FirstVC()
+            let navi = UINavigationController(rootViewController: introVC)
+            window.rootViewController = navi
+        } else {
+            window.rootViewController = TabBarCtrler()
+        }
+        
+//        let vc = FirstVC()
+//        let navi = UINavigationController(rootViewController: vc)
+//        
+//        window.rootViewController = navi
+        
+        self.window = window
+        window.makeKeyAndVisible()
+        
     }
+    
+//    func setupTabBarController() {
+//        let tabBarCtrler = UITabBarController()
+//        
+//        
+//    }
+    
+    
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

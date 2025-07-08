@@ -15,7 +15,7 @@ class SettingsCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        containerView.layer.cornerRadius = 12
+//        containerView.layer.cornerRadius = 12
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,9 +24,12 @@ class SettingsCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
+    
     func configure(title: String, icon: UIImage) {
         titleLabel.text = title
         iconImage.image = icon
     }
     
 }
+
