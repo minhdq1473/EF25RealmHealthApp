@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomView" customModule="EF25NavigationApp" customModuleProvider="target">
+            <connections>
+                <outlet property="label" destination="1dG-pl-Tyv" id="BJC-Cf-DWv"/>
+                <outlet property="text" destination="JFU-f6-IG2" id="d8v-Ft-qw5"/>
+                <outlet property="view" destination="6o0-6z-UJa" id="DdW-4H-bl4"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CustomView">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="84"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="oY3-RZ-me6">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="83.333333333333329"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dG-pl-Tyv">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="19.333333333333332"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <color key="textColor" name="Neutral15"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6o0-6z-UJa">
+                            <rect key="frame" x="0.0" y="31.333333333333329" width="393" height="52"/>
+                            <subviews>
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter first name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JFU-f6-IG2">
+                                    <rect key="frame" x="12" y="14.000000000000004" width="115" height="23.999999999999996"/>
+                                    <color key="backgroundColor" name="Neutral5"/>
+                                    <color key="textColor" name="Neutral1"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" name="Neutral5"/>
+                            <constraints>
+                                <constraint firstItem="JFU-f6-IG2" firstAttribute="top" secondItem="6o0-6z-UJa" secondAttribute="top" constant="14" id="JRb-bU-Dvf"/>
+                                <constraint firstAttribute="height" constant="52" id="eMn-5e-0KU"/>
+                                <constraint firstItem="JFU-f6-IG2" firstAttribute="leading" secondItem="6o0-6z-UJa" secondAttribute="leading" constant="12" id="eQY-1z-9OK"/>
+                                <constraint firstAttribute="bottom" secondItem="JFU-f6-IG2" secondAttribute="bottom" constant="14" id="snU-vP-dfu"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" name="Background"/>
+            <constraints>
+                <constraint firstItem="oY3-RZ-me6" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="RwR-1s-GjC"/>
+                <constraint firstAttribute="bottom" secondItem="oY3-RZ-me6" secondAttribute="bottom" constant="0.67000000000000004" id="ZtH-xK-zgE"/>
+                <constraint firstItem="oY3-RZ-me6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="hLt-hF-HMJ"/>
+                <constraint firstAttribute="trailing" secondItem="oY3-RZ-me6" secondAttribute="trailing" id="uY2-wA-DV7"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-645.03816793893122" y="43.661971830985919"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="Background">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Neutral1">
+            <color red="0.17647058823529413" green="0.19215686274509805" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Neutral15">
+            <color red="0.34901960784313724" green="0.38039215686274508" blue="0.47843137254901963" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Neutral5">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
