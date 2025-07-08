@@ -19,17 +19,17 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="f7a-Vh-HTA">
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="f7a-Vh-HTA">
                     <rect key="frame" x="0.0" y="134" width="393" height="614"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="membership" translatesAutoresizingMaskIntoConstraints="NO" id="qhv-Qi-7Zo">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="110"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="111"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="110" id="sod-eF-Smi"/>
+                                <constraint firstAttribute="height" constant="111" id="sod-eF-Smi"/>
                             </constraints>
                         </imageView>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3Zr-mx-o8L">
-                            <rect key="frame" x="16" y="110" width="361" height="504"/>
+                            <rect key="frame" x="16" y="127" width="361" height="487"/>
                             <color key="sectionIndexBackgroundColor" name="Background"/>
                         </tableView>
                     </subviews>

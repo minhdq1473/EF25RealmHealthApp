@@ -14,7 +14,6 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = ""
         
         tableView.register(UINib(nibName: "SettingsCell", bundle: nil), forCellReuseIdentifier: "SettingsCell")
         
@@ -23,7 +22,7 @@ class SettingsVC: UIViewController {
         
         tableView.backgroundColor = .clear
         tableView.separatorInset = .init(top: 0, left: 52, bottom: 0, right: 16)
-        tableView.separatorColor = .accentLine
+//        tableView.separatorColor = .accentLine
         tableView.showsVerticalScrollIndicator = false
     
         setUpTitle()
@@ -83,10 +82,20 @@ extension SettingsVC: UITableViewDataSource {
         
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        0.1
+        0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        16
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = .clear
         return view

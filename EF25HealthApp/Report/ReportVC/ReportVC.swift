@@ -13,7 +13,6 @@ class ReportVC: UIViewController {
     @IBOutlet weak var heartButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = ""
 //        navigationController?.navigationBar.prefersLargeTitles = true
 //        navigationItem.largeTitleDisplayMode = .always
 
