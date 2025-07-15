@@ -21,19 +21,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
 
         
-//        let isFirstLaunch = !UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
-//        if isFirstLaunch {
-//            let introVC = FirstVC()
-//            let navi = UINavigationController(rootViewController: introVC)
-//            window.rootViewController = navi
-//        } else {
-//            window.rootViewController = TabBarController()
-//        }
+        let isFirstLaunch = !UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
+        if isFirstLaunch {
+            let introVC = FirstVC()
+            let navi = UINavigationController(rootViewController: introVC)
+            window.rootViewController = navi
+        } else {
+            window.rootViewController = TabBarController()
+        }
         
-        let vc = FirstVC()
-        let navi = UINavigationController(rootViewController: vc)
-        
-        window.rootViewController = navi
+//        let vc = FirstVC()
+//        let navi = UINavigationController(rootViewController: vc)
+//        
+//        window.rootViewController = navi
         
         self.window = window
         window.makeKeyAndVisible()

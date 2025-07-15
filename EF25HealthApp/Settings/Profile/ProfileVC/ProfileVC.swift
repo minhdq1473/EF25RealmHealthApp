@@ -31,11 +31,15 @@ class ProfileVC: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Profile"
+        setupTitle()
         setupUI()
         setupBarButton()
         setupSwipeGesture()
         setupDataFlow()
+    }
+    
+    func setupTitle() {
+        title = "Profile"
     }
     
     func setupUI() {
@@ -47,10 +51,10 @@ class ProfileVC: UIViewController, UIGestureRecognizerDelegate {
     
     func setupBarButton() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editButtonTapped))
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .semibold)], for: .normal)
         navigationItem.rightBarButtonItem?.tintColor = .primary1
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.left"), style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem?.tintColor = .neutral2
-        
     }
     
     func setupSwipeGesture() {
@@ -58,6 +62,7 @@ class ProfileVC: UIViewController, UIGestureRecognizerDelegate {
 //        self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
         self.navigationController?.interactivePopGestureRecognizer?.addTarget(self, action: #selector(swipeleft))
     }
+    
     func setupDataFlow() {
         if let data = UserDefaults.standard.data(forKey: "userProfile"),
             let profile = try? JSONDecoder().decode(Profile.self, from: data) {

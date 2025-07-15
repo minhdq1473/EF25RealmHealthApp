@@ -20,8 +20,7 @@ class InputVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Information"
-        
+        setupTitle()
         setupText()
         setupButton()
         setupDismissButton()
@@ -33,6 +32,10 @@ class InputVC: UIViewController {
         
         inputDelegate?.update(log)
         dismiss(animated: true)
+    }
+    
+    func setupTitle() {
+        title = "Information"
     }
     
     func setupText() {

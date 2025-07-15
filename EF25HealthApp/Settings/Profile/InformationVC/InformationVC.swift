@@ -25,7 +25,7 @@ class InformationVC: UIViewController, UIGestureRecognizerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Information"
+        setupTitle()
         setupButton()
         setupTextField()
         setupBackButton()
@@ -54,6 +54,10 @@ class InformationVC: UIViewController, UIGestureRecognizerDelegate {
         } else {
             navigationController?.popViewController(animated: true)
         }
+    }
+    
+    func setupTitle() {
+        title = "Information"
     }
     
     func setupTextField() {
