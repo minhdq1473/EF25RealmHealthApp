@@ -8,7 +8,6 @@
 import UIKit
 
 class CustomView: UIView {
-    
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var view: UIView!
     @IBOutlet weak var text: UITextField!
@@ -16,26 +15,12 @@ class CustomView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         loadFromNib()
-        
-//        view.layer.cornerRadius = 16
-//        view.layer.masksToBounds = true
-//        backgroundColor = .background
-        
-//        let avatar = UIImageView(image: UIImage(named: "Image"))
-//        avatar.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height)
-//        avatar.contentMode = .scaleAspectFill
-//        self.addSubview(avatar)
-        
-        
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         loadFromNib()
-        
-        view.layer.cornerRadius = 16
-        view.layer.borderWidth = 1
-        view.layer.borderColor = UIColor(named: "neutral4")?.cgColor
+        setupUI()
     }
     
     override func layoutSubviews() {
@@ -45,16 +30,40 @@ class CustomView: UIView {
     private func loadFromNib() {
         let nib = UINib(nibName: "CustomView", bundle: nil)
         let nibView = nib.instantiate(withOwner: self)[0] as! UIView
-        
+    
         addSubview(nibView)
         nibView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
             nibView.topAnchor.constraint(equalTo: topAnchor),
             nibView.bottomAnchor.constraint(equalTo: bottomAnchor),
             nibView.leadingAnchor.constraint(equalTo: leadingAnchor),
             nibView.trailingAnchor.constraint(equalTo: trailingAnchor)])
-        
     }
+    
+    func setupUI() {
+        view.layer.cornerRadius = 16
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor(named: "neutral4")?.cgColor
+    }
+    
+    func configure(labelText: String, placeholder: String) {
+        label.text = labelText
+        text.placeholder = placeholder
+    }
+    
+    func getTextValue() -> String? {
+        guard let text = text.text else {return nil}
+        return text
+    }
+    
+    func validateValue(max: Int) -> Int? {
+        guard let text = text.text, let intValue = Int(text), (0...max).contains(intValue) else {
+            return nil
+        }
+        return intValue
+    }
+    
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -62,5 +71,4 @@ class CustomView: UIView {
         // Drawing code
     }
     */
-
 }

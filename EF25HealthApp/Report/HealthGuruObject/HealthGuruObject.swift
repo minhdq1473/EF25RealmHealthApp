@@ -10,7 +10,7 @@ import UIKit
 
 struct HealthGuru {
     let pulse: Int
-    let HRV: String
+    let HRV: Int
     
     enum status: String {
         case good = "Good"

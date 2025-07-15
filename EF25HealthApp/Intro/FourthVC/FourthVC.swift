@@ -38,7 +38,7 @@ class FourthVC: UIViewController {
 //        let window = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first
 //        window?.rootViewController = TabBarCtrler()
         
-        let vc = TabBarCtrler()
+        let vc = TabBarController()
         navigationController?.setViewControllers([vc], animated: true)
 //        navigationItem.backBarButtonItem = nil
         UserDefaults.standard.set(true, forKey: "hasCompletedOnboarding")

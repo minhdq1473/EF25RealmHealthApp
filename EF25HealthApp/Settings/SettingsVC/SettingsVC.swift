@@ -8,30 +8,15 @@
 import UIKit
 
 class SettingsVC: UIViewController {
-    
-    
-    
     @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.register(UINib(nibName: "SettingsCell", bundle: nil), forCellReuseIdentifier: "SettingsCell")
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        tableView.backgroundColor = .clear
-        tableView.separatorInset = .init(top: 0, left: 52, bottom: 0, right: 16)
-//        tableView.separatorColor = .accentLine
-        tableView.showsVerticalScrollIndicator = false
-    
-        setUpTitle()
-        // Do any additional setup after loading the view.
-        //2
-        
+        setupTitle()
+        setupTableView()
     }
     
-    func setUpTitle() {
+    func setupTitle() {
         let titleLabel = UILabel()
         titleLabel.text = "Settings"
         titleLabel.font = UIFont.systemFont(ofSize: 32, weight: .semibold)
@@ -40,18 +25,17 @@ class SettingsVC: UIViewController {
         titleLabel.sizeToFit()
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func setupTableView() {
+        tableView.register(UINib(nibName: "SettingsCell", bundle: nil), forCellReuseIdentifier: "SettingsCell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .clear
+        tableView.separatorInset = .init(top: 0, left: 52, bottom: 0, right: 16)
+        tableView.showsVerticalScrollIndicator = false
     }
-    */
-
 }
+
 extension SettingsVC: UITableViewDelegate {
     
 }
@@ -60,6 +44,7 @@ extension SettingsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let infoVC = InformationVC()
         let profileVC = ProfileVC()
+        
         if indexPath.section == 0 {
             let hasProfile = UserDefaults.standard.bool(forKey: "hasProfile")
             if hasProfile {
@@ -71,16 +56,8 @@ extension SettingsVC: UITableViewDataSource {
                 tabBarController?.isTabBarHidden = true
             }
         }
-        
-        
-
-//        if profileVC.nameLabel.text! == "" {
-//            navigationController?.pushViewController(infoVC, animated: true)
-//        } else {
-        //            navigationController?.pushViewController(profileVC, animated: true)
-//        }
-        
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         0
     }
@@ -97,6 +74,7 @@ extension SettingsVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
+        
         view.backgroundColor = .clear
         return view
     }
@@ -112,6 +90,7 @@ extension SettingsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SettingsCell", for: indexPath) as! SettingsCell
         let item = settingsSection[indexPath.section][indexPath.row]
+        
         cell.configure(title: item.title, icon: item.icon)
         return cell
     }
@@ -119,9 +98,6 @@ extension SettingsVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? SettingsCell else { return }
         let numberOfRows = tableView.numberOfRows(inSection: indexPath.section)
-//        if indexPath.section == 0 {
-//            cell.containerView.layer.cornerRadius = 12
-//        }
         let isFirst = indexPath.row == 0
         let isLast = indexPath.row == numberOfRows - 1
         
@@ -142,10 +118,8 @@ extension SettingsVC: UITableViewDataSource {
         } else {
             cell.containerView.layer.cornerRadius = 0
         }
-        
     }
 }
-
 
 extension SettingsVC: ResultDelegate {
     func update(_ profile: Profile) {

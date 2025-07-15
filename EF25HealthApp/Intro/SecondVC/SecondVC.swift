@@ -35,6 +35,11 @@ class SecondVC: UIViewController {
         continueBtn.backgroundColor = .neutral3
         continueBtn.tintColor = .neutral5
         
+        continueBtn.layer.shadowColor = UIColor.blue.cgColor
+        continueBtn.layer.shadowOpacity = 0.32
+        continueBtn.layer.shadowOffset = CGSize(width: 0, height: 4)
+        continueBtn.layer.shadowRadius = 12
+        
     }
     
 

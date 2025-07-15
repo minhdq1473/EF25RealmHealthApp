@@ -45,8 +45,12 @@
 		2C86F7C42E1AF34100003D84 /* TrackDailyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86F7C22E1AF34100003D84 /* TrackDailyCell.swift */; };
 		2C86F7C52E1AF34100003D84 /* TrackDailyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C86F7C32E1AF34100003D84 /* TrackDailyCell.xib */; };
 		2C86F7CA2E1AF46400003D84 /* HealthGuruObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86F7C92E1AF45C00003D84 /* HealthGuruObject.swift */; };
-		2C86F7CE2E1B322900003D84 /* TabBarCtrler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86F7CC2E1B322900003D84 /* TabBarCtrler.swift */; };
+		2C86F7CE2E1B322900003D84 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86F7CC2E1B322900003D84 /* TabBarController.swift */; };
 		2C86F7D12E1B357100003D84 /* TabBarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86F7D02E1B357100003D84 /* TabBarAppearance.swift */; };
+		2CEE91452E248D840025992F /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEE91432E248D840025992F /* IntroVC.swift */; };
+		2CEE91482E248F120025992F /* IntroVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CEE91472E248F120025992F /* IntroVC.xib */; };
+		2CEE914C2E2490290025992F /* NestedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEE914A2E2490290025992F /* NestedCollectionViewCell.swift */; };
+		2CEE914D2E2490290025992F /* NestedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CEE914B2E2490290025992F /* NestedCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,8 +94,12 @@
 		2C86F7C22E1AF34100003D84 /* TrackDailyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDailyCell.swift; sourceTree = "<group>"; };
 		2C86F7C32E1AF34100003D84 /* TrackDailyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrackDailyCell.xib; sourceTree = "<group>"; };
 		2C86F7C92E1AF45C00003D84 /* HealthGuruObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthGuruObject.swift; sourceTree = "<group>"; };
-		2C86F7CC2E1B322900003D84 /* TabBarCtrler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarCtrler.swift; sourceTree = "<group>"; };
+		2C86F7CC2E1B322900003D84 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		2C86F7D02E1B357100003D84 /* TabBarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarAppearance.swift; sourceTree = "<group>"; };
+		2CEE91432E248D840025992F /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
+		2CEE91472E248F120025992F /* IntroVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntroVC.xib; sourceTree = "<group>"; };
+		2CEE914A2E2490290025992F /* NestedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedCollectionViewCell.swift; sourceTree = "<group>"; };
+		2CEE914B2E2490290025992F /* NestedCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NestedCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,13 +137,12 @@
 				2C86F73E2E1761CD00003D84 /* Report */,
 				2C86F73F2E1761DF00003D84 /* Settings */,
 				2C86F7CB2E1B31C700003D84 /* TabBarController */,
-				2C86F72C2E17609500003D84 /* AppDelegate.swift */,
-				2C86F72D2E17609500003D84 /* Assets.xcassets */,
+				2CD0678B2E26C0F500B7E59B /* Resources */,
+				2CD067902E26C15F00B7E59B /* LifeCycle */,
+				2C86F7342E17609500003D84 /* ViewController.swift */,
 				2C86F72E2E17609500003D84 /* Info.plist */,
 				2C86F7302E17609500003D84 /* LaunchScreen.storyboard */,
 				2C86F7322E17609500003D84 /* Main.storyboard */,
-				2C86F7332E17609500003D84 /* SceneDelegate.swift */,
-				2C86F7342E17609500003D84 /* ViewController.swift */,
 			);
 			path = EF25HealthApp;
 			sourceTree = "<group>";
@@ -143,11 +150,11 @@
 		2C86F73D2E1761C600003D84 /* Intro */ = {
 			isa = PBXGroup;
 			children = (
-				2C86F74D2E1762AF00003D84 /* CollectionCell */,
 				2C86F7402E1761F100003D84 /* FirstVC */,
 				2C86F7472E17622F00003D84 /* SecondVC */,
 				2C86F7592E17782900003D84 /* ThirdVC */,
 				2C86F7612E177F6200003D84 /* FourthVC */,
+				2CEE91422E248D220025992F /* IntroVC */,
 			);
 			path = Intro;
 			sourceTree = "<group>";
@@ -331,10 +338,47 @@
 		2C86F7CB2E1B31C700003D84 /* TabBarController */ = {
 			isa = PBXGroup;
 			children = (
-				2C86F7CC2E1B322900003D84 /* TabBarCtrler.swift */,
+				2C86F7CC2E1B322900003D84 /* TabBarController.swift */,
 				2C86F7D02E1B357100003D84 /* TabBarAppearance.swift */,
 			);
 			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		2CD0678B2E26C0F500B7E59B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2C86F72D2E17609500003D84 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2CD067902E26C15F00B7E59B /* LifeCycle */ = {
+			isa = PBXGroup;
+			children = (
+				2C86F72C2E17609500003D84 /* AppDelegate.swift */,
+				2C86F7332E17609500003D84 /* SceneDelegate.swift */,
+			);
+			path = LifeCycle;
+			sourceTree = "<group>";
+		};
+		2CEE91422E248D220025992F /* IntroVC */ = {
+			isa = PBXGroup;
+			children = (
+				2CEE91432E248D840025992F /* IntroVC.swift */,
+				2CEE91472E248F120025992F /* IntroVC.xib */,
+				2CEE91492E248FD00025992F /* NestedCollectionView */,
+				2C86F74D2E1762AF00003D84 /* CollectionCell */,
+			);
+			path = IntroVC;
+			sourceTree = "<group>";
+		};
+		2CEE91492E248FD00025992F /* NestedCollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				2CEE914A2E2490290025992F /* NestedCollectionViewCell.swift */,
+				2CEE914B2E2490290025992F /* NestedCollectionViewCell.xib */,
+			);
+			path = NestedCollectionView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -412,9 +456,11 @@
 				2C86F76D2E17DE8600003D84 /* SettingsVC.xib in Resources */,
 				2C86F7C12E1AF31F00003D84 /* ReportCell.xib in Resources */,
 				2C86F7382E17609500003D84 /* LaunchScreen.storyboard in Resources */,
+				2CEE914D2E2490290025992F /* NestedCollectionViewCell.xib in Resources */,
 				2C86F7722E17E24E00003D84 /* SettingsCell.xib in Resources */,
 				2C86F7392E17609500003D84 /* Main.storyboard in Resources */,
 				2C86F7B22E17F88B00003D84 /* ProfileVC.xib in Resources */,
+				2CEE91482E248F120025992F /* IntroVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,8 +474,9 @@
 				2C86F7692E17802400003D84 /* ThirdVC.swift in Sources */,
 				2C86F73A2E17609500003D84 /* AppDelegate.swift in Sources */,
 				2C86F7492E17622F00003D84 /* SecondVC.swift in Sources */,
-				2C86F7CE2E1B322900003D84 /* TabBarCtrler.swift in Sources */,
+				2C86F7CE2E1B322900003D84 /* TabBarController.swift in Sources */,
 				2C86F7D12E1B357100003D84 /* TabBarAppearance.swift in Sources */,
+				2CEE91452E248D840025992F /* IntroVC.swift in Sources */,
 				2C86F7A72E17F75800003D84 /* CustomView.swift in Sources */,
 				2C86F7B12E17F88B00003D84 /* ProfileVC.swift in Sources */,
 				2C86F7442E17620E00003D84 /* FirstVC.swift in Sources */,
@@ -448,6 +495,7 @@
 				2C86F7C02E1AF31F00003D84 /* ReportCell.swift in Sources */,
 				2C86F73C2E17609500003D84 /* ViewController.swift in Sources */,
 				2C86F76C2E17DE8600003D84 /* SettingsVC.swift in Sources */,
+				2CEE914C2E2490290025992F /* NestedCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

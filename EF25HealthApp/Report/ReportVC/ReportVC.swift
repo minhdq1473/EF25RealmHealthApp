@@ -8,40 +8,36 @@
 import UIKit
 
 class ReportVC: UIViewController {
-    var log: [HealthGuru] = []
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var heartButton: UIButton!
+    
+    var log: [HealthGuru] = []
+
     override func viewDidLoad() {
         super.viewDidLoad()
-//        navigationController?.navigationBar.prefersLargeTitles = true
-//        navigationItem.largeTitleDisplayMode = .always
-
-//        navigationController?.navigationBar.titleTextAttributes = [
-//            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 32, weight: .semibold),
-//            NSAttributedString.Key.foregroundColor: UIColor.neutral1
-//            NSAttributedString.Key.paragraphStyle: {
-//                let style = NSMutableParagraphStyle()
-//                style.alignment = .left
-//                return style
-//            }()
-//        ]
-        
-
-        
-        
-        
+        setUpTableView()
+        setUpTitle()
+        updateBackgroundView()
+    }
+    
+    func setUpTableView() {
         tableView.register(UINib(nibName: "ReportCell", bundle: nil), forCellReuseIdentifier: "ReportCell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.showsVerticalScrollIndicator = false
-        // Do any additional setup after loading the view.
-        setUpTitle()
-        updateBackgroundView()
-        navigationItem.leftBarButtonItem = nil
-//        heartButton.addTarget(self, action: #selector(heartButtonTapped(_:)), for: .touchUpInside)
     }
-
+    
+    func setUpTitle() {
+        let titleLabel = UILabel()
+        titleLabel.text = "Health Guru"
+        titleLabel.font = UIFont.systemFont(ofSize: 32, weight: .semibold)
+        titleLabel.textColor = UIColor.neutral1
+        titleLabel.textAlignment = .left
+        titleLabel.sizeToFit()
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
+    }
+    
     func updateBackgroundView() {
         if log.isEmpty {
             let emptyView = UIView(frame: tableView.bounds)
@@ -70,32 +66,13 @@ class ReportVC: UIViewController {
         }
     }
     
-    func setUpTitle() {
-        let titleLabel = UILabel()
-        titleLabel.text = "Health Guru"
-        titleLabel.font = UIFont.systemFont(ofSize: 32, weight: .semibold)
-        titleLabel.textColor = UIColor.neutral1
-        titleLabel.textAlignment = .left
-        titleLabel.sizeToFit()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
-    }
-    
     @IBAction func heartButtonTapped(_ sender: UIButton) {
         let vc = InputVC()
         vc.inputDelegate = self
-        navigationController?.pushViewController(vc, animated: true)
-        tabBarController?.isTabBarHidden = true
+        let navController = UINavigationController(rootViewController: vc)
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension ReportVC: UITableViewDataSource {

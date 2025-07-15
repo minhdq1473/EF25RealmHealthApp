@@ -32,7 +32,7 @@
                             <rect key="frame" x="0.0" y="35.333333333333336" width="393" height="52.000000000000007"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter first name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JFU-f6-IG2">
-                                    <rect key="frame" x="12" y="14" width="115" height="24"/>
+                                    <rect key="frame" x="12" y="14" width="381" height="24"/>
                                     <color key="backgroundColor" name="Neutral5"/>
                                     <color key="textColor" name="Neutral1"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -42,6 +42,7 @@
                             <color key="backgroundColor" name="Neutral5"/>
                             <constraints>
                                 <constraint firstItem="JFU-f6-IG2" firstAttribute="top" secondItem="6o0-6z-UJa" secondAttribute="top" constant="14" id="JRb-bU-Dvf"/>
+                                <constraint firstAttribute="trailing" secondItem="JFU-f6-IG2" secondAttribute="trailing" id="Lmr-TO-U7t"/>
                                 <constraint firstAttribute="height" constant="52" id="eMn-5e-0KU"/>
                                 <constraint firstItem="JFU-f6-IG2" firstAttribute="leading" secondItem="6o0-6z-UJa" secondAttribute="leading" constant="12" id="eQY-1z-9OK"/>
                                 <constraint firstAttribute="bottom" secondItem="JFU-f6-IG2" secondAttribute="bottom" constant="14" id="snU-vP-dfu"/>

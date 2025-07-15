@@ -17,21 +17,22 @@ class ReportCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        stackView.layer.cornerRadius = 12
-        stackView.layoutMargins = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
-        stackView.isLayoutMarginsRelativeArrangement = true
-        // Initialization code
+        setupStackView()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    }
+    
+    func setupStackView() {
+        stackView.layer.cornerRadius = 12
+        stackView.layoutMargins = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+        stackView.isLayoutMarginsRelativeArrangement = true
     }
     
     func configure(log: HealthGuru) {
         pulseLabel.text = String(log.pulse)
-        hrvLabel.text = log.HRV
+        hrvLabel.text = String(log.HRV)
         let status = log.getStatus(pulse: log.pulse)
         statusLabel.text = status.rawValue
         pulseLabel.textColor = status.color

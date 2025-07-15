@@ -22,50 +22,41 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="530" translatesAutoresizingMaskIntoConstraints="NO" id="m5T-Bk-oCc">
-                    <rect key="frame" x="16" y="142" width="361" height="626"/>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="S3b-Br-ha2">
+                    <rect key="frame" x="16" y="142" width="361" height="64"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="S3b-Br-ha2">
-                            <rect key="frame" x="0.0" y="0.0" width="361" height="40"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CVj-uT-A4W" customClass="CustomView" customModule="EF25HealthApp" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="172.66666666666666" height="40"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q3V-YE-w36" customClass="CustomView" customModule="EF25HealthApp" customModuleProvider="target">
-                                    <rect key="frame" x="188.66666666666663" y="0.0" width="172.33333333333337" height="40"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                </view>
-                            </subviews>
-                        </stackView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kl9-HJ-7Th">
-                            <rect key="frame" x="0.0" y="570" width="361" height="56"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="56" id="QRQ-6X-hB6"/>
-                            </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                            <connections>
-                                <action selector="addButtonTapped:" destination="-1" eventType="touchUpInside" id="lFF-Ro-88V"/>
-                            </connections>
-                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CVj-uT-A4W" customClass="CustomView" customModule="EF25HealthApp" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="172.66666666666666" height="64"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q3V-YE-w36" customClass="CustomView" customModule="EF25HealthApp" customModuleProvider="target">
+                            <rect key="frame" x="188.66666666666663" y="0.0" width="172.33333333333337" height="64"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
                     </subviews>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="kl9-HJ-7Th" secondAttribute="trailing" id="4q0-Pq-fW9"/>
-                        <constraint firstItem="S3b-Br-ha2" firstAttribute="leading" secondItem="m5T-Bk-oCc" secondAttribute="leading" id="63S-s7-cPK"/>
-                        <constraint firstItem="kl9-HJ-7Th" firstAttribute="leading" secondItem="m5T-Bk-oCc" secondAttribute="leading" id="pQJ-Wh-Hi4"/>
-                        <constraint firstAttribute="trailing" secondItem="S3b-Br-ha2" secondAttribute="trailing" id="qH4-aX-S2Y"/>
-                        <constraint firstItem="S3b-Br-ha2" firstAttribute="top" secondItem="m5T-Bk-oCc" secondAttribute="top" id="w2d-93-iG8"/>
-                    </constraints>
                 </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kl9-HJ-7Th">
+                    <rect key="frame" x="16" y="712" width="361" height="56"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="QRQ-6X-hB6"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    <connections>
+                        <action selector="addButtonTapped:" destination="-1" eventType="touchUpInside" id="lFF-Ro-88V"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="Background"/>
             <constraints>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="m5T-Bk-oCc" secondAttribute="trailing" constant="16" id="1EF-xB-SRa"/>
-                <constraint firstItem="m5T-Bk-oCc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="9eh-0u-go8"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="m5T-Bk-oCc" secondAttribute="bottom" constant="16" id="DHO-vW-3KF"/>
-                <constraint firstItem="m5T-Bk-oCc" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="24" id="QFP-DQ-6LO"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="kl9-HJ-7Th" secondAttribute="bottom" constant="16" id="DOB-D5-zwl"/>
+                <constraint firstItem="kl9-HJ-7Th" firstAttribute="top" secondItem="S3b-Br-ha2" secondAttribute="bottom" priority="250" constant="506" id="dxa-UB-wnt"/>
+                <constraint firstItem="kl9-HJ-7Th" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="kCt-ew-6W3"/>
+                <constraint firstItem="S3b-Br-ha2" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="24" id="oTD-bx-mlt"/>
+                <constraint firstItem="S3b-Br-ha2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="pKL-SO-3oh"/>
+                <constraint firstItem="S3b-Br-ha2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="wAv-C0-uU5"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kl9-HJ-7Th" secondAttribute="trailing" constant="16" id="ywn-GP-PY5"/>
             </constraints>
             <point key="canvasLocation" x="-11" y="-11"/>
         </view>

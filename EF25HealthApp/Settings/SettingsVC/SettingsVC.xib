@@ -28,7 +28,7 @@
                                 <constraint firstAttribute="height" constant="111" id="sod-eF-Smi"/>
                             </constraints>
                         </imageView>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3Zr-mx-o8L">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="3Zr-mx-o8L">
                             <rect key="frame" x="16" y="127" width="361" height="487"/>
                             <color key="sectionIndexBackgroundColor" name="Background"/>
                         </tableView>
