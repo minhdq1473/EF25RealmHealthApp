@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DeleteAlertVC" customModule="EF25NavigationApp" customModuleProvider="target">
+            <connections>
+                <outlet property="cancelBtn" destination="P4o-Da-mpN" id="ej1-cI-lES"/>
+                <outlet property="messageLabel" destination="GjW-Lg-szg" id="4Ro-OK-lxh"/>
+                <outlet property="outterStack" destination="yR6-J4-8xh" id="k5l-Cj-f9J"/>
+                <outlet property="titleLabel" destination="41W-cM-LJa" id="voa-IZ-HfH"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="yesBtn" destination="Htv-rW-OXT" id="RN2-1d-dDH"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qai-lt-HAx">
+                    <rect key="frame" x="16" y="118" width="361" height="616"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="yR6-J4-8xh">
+                            <rect key="frame" x="16" y="249.66666666666669" width="329" height="117"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="f4b-oI-yf4">
+                                    <rect key="frame" x="0.0" y="0.0" width="329" height="49"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Delete Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41W-cM-LJa">
+                                            <rect key="frame" x="104.33333333333334" y="0.0" width="120.66666666666666" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                            <color key="textColor" name="Neutral1"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Are you sure want to delete?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GjW-Lg-szg">
+                                            <rect key="frame" x="72.666666666666671" y="32" width="183.66666666666663" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" name="Neutral3"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="c5d-ue-aJz">
+                                    <rect key="frame" x="0.0" y="69" width="329" height="48"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P4o-Da-mpN">
+                                            <rect key="frame" x="0.0" y="0.0" width="156.66666666666666" height="48"/>
+                                            <color key="backgroundColor" name="Neutral5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="48" id="07j-wi-yy7"/>
+                                            </constraints>
+                                            <color key="tintColor" name="Primary1"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="Cancel"/>
+                                            <connections>
+                                                <action selector="cancelTapped:" destination="-1" eventType="touchUpInside" id="KJn-Pj-kND"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Htv-rW-OXT">
+                                            <rect key="frame" x="172.66666666666663" y="0.0" width="156.33333333333337" height="48"/>
+                                            <color key="backgroundColor" name="Primary1"/>
+                                            <color key="tintColor" name="Neutral5"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="Yes"/>
+                                            <connections>
+                                                <action selector="yesTapped:" destination="-1" eventType="touchUpInside" id="JIO-OM-otS"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="48" id="hnn-cy-GZt"/>
+                                    </constraints>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" name="Neutral5"/>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="yR6-J4-8xh" firstAttribute="leading" secondItem="Qai-lt-HAx" secondAttribute="leading" constant="16" id="Ii6-dH-SuQ"/>
+                        <constraint firstItem="yR6-J4-8xh" firstAttribute="centerY" secondItem="Qai-lt-HAx" secondAttribute="centerY" id="QP4-A3-Xeq"/>
+                        <constraint firstItem="yR6-J4-8xh" firstAttribute="centerX" secondItem="Qai-lt-HAx" secondAttribute="centerX" id="vs7-zC-f8o"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <constraints>
+                <constraint firstItem="Qai-lt-HAx" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="3wB-I1-N3U"/>
+                <constraint firstItem="Qai-lt-HAx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="6Sx-84-bVN"/>
+                <constraint firstItem="Qai-lt-HAx" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="aib-FQ-5ie"/>
+                <constraint firstItem="Qai-lt-HAx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nPv-HL-zF6"/>
+            </constraints>
+            <point key="canvasLocation" x="-1808.3969465648854" y="70.422535211267615"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="Neutral1">
+            <color red="0.17647058823529413" green="0.19215686274509805" blue="0.25882352941176473" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Neutral3">
+            <color red="0.61176470588235299" green="0.61960784313725492" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Neutral5">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Primary1">
+            <color red="1" green="0.38823529411764707" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

@@ -33,8 +33,9 @@ class ReportCell: UITableViewCell {
     func configure(log: HealthGuru) {
         pulseLabel.text = String(log.pulse)
         hrvLabel.text = String(log.HRV)
-        let status = log.getStatus(pulse: log.pulse)
+        let status = log.status.getStatus(pulse: log.pulse)
         statusLabel.text = status.rawValue
+        
         pulseLabel.textColor = status.color
         hrvLabel.textColor = status.color
         statusLabel.textColor = status.color

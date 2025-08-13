@@ -6,17 +6,17 @@
 //
 
 import UIKit
-
-protocol InputVCDelegate: AnyObject {
-    func update(_ log: HealthGuru)
-}
+import RealmSwift
+//protocol InputVCDelegate: AnyObject {
+//    func update(_ log: HealthGuru)
+//}
 
 class InputVC: UIViewController {
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var view1: CustomView!
     @IBOutlet weak var view2: CustomView!
     
-    var inputDelegate: InputVCDelegate?
+//    var inputDelegate: InputVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +28,10 @@ class InputVC: UIViewController {
     
     @IBAction func addButtonTapped(_ sender: UIButton) {
         guard let pulse = view1.validateValue(max: 200), let hrv = view2.validateValue(max: 200) else {return}
-        let log = HealthGuru(pulse: pulse, HRV: hrv)
+        RealmManager.shared.add(pulse: pulse, hrv: hrv)
         
-        inputDelegate?.update(log)
+//        let log = HealthGuru(pulse: pulse, HRV: hrv)
+//        inputDelegate?.update(log)
         dismiss(animated: true)
     }
     

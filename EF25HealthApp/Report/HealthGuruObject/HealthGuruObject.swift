@@ -7,25 +7,30 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
-struct HealthGuru {
-    let pulse: Int
-    let HRV: Int
+class HealthGuru: Object {
+    @Persisted(primaryKey: true) var id: ObjectId
+    @Persisted var pulse: Int
+    @Persisted var HRV: Int
+    @Persisted var status: status
+    @Persisted var timestamp: Date = Date()
+
+}
+
+enum status: String, PersistableEnum {
+    case good = "Good"
+    case low = "Low"
+    case warning = "Warning"
     
-    enum status: String {
-        case good = "Good"
-        case low = "Low"
-        case warning = "Warning"
-        
-        var color: UIColor {
-            switch self {
-            case .good:
-                return .accentNormal
-            case .low:
-                return .low
-            case .warning:
-                return .warning
-            }
+    var color: UIColor {
+        switch self {
+        case .good:
+            return .accentNormal
+        case .low:
+            return .low
+        case .warning:
+            return .warning
         }
     }
     

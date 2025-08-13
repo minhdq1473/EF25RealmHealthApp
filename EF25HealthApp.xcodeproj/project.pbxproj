@@ -47,10 +47,14 @@
 		2C86F7CA2E1AF46400003D84 /* HealthGuruObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86F7C92E1AF45C00003D84 /* HealthGuruObject.swift */; };
 		2C86F7CE2E1B322900003D84 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86F7CC2E1B322900003D84 /* TabBarController.swift */; };
 		2C86F7D12E1B357100003D84 /* TabBarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86F7D02E1B357100003D84 /* TabBarAppearance.swift */; };
+		2C91A2172E4C36110026A073 /* DeleteAlertVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C91A2162E4C36110026A073 /* DeleteAlertVC.xib */; };
+		2C91A2182E4C36110026A073 /* DeleteAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91A2152E4C36110026A073 /* DeleteAlertVC.swift */; };
+		2CE2A42A2E4B2E7800DBF3AF /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE2A4292E4B2E7200DBF3AF /* RealmManager.swift */; };
 		2CEE91452E248D840025992F /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEE91432E248D840025992F /* IntroVC.swift */; };
 		2CEE91482E248F120025992F /* IntroVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CEE91472E248F120025992F /* IntroVC.xib */; };
 		2CEE914C2E2490290025992F /* NestedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEE914A2E2490290025992F /* NestedCollectionViewCell.swift */; };
 		2CEE914D2E2490290025992F /* NestedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CEE914B2E2490290025992F /* NestedCollectionViewCell.xib */; };
+		CF34F4F7BD19C28B798EF3C1 /* Pods_EF25HealthApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F7EA58D5DC1ADC9956ACCDB /* Pods_EF25HealthApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,10 +100,16 @@
 		2C86F7C92E1AF45C00003D84 /* HealthGuruObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthGuruObject.swift; sourceTree = "<group>"; };
 		2C86F7CC2E1B322900003D84 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		2C86F7D02E1B357100003D84 /* TabBarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarAppearance.swift; sourceTree = "<group>"; };
+		2C91A2152E4C36110026A073 /* DeleteAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAlertVC.swift; sourceTree = "<group>"; };
+		2C91A2162E4C36110026A073 /* DeleteAlertVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeleteAlertVC.xib; sourceTree = "<group>"; };
+		2CE2A4292E4B2E7200DBF3AF /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		2CEE91432E248D840025992F /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
 		2CEE91472E248F120025992F /* IntroVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntroVC.xib; sourceTree = "<group>"; };
 		2CEE914A2E2490290025992F /* NestedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedCollectionViewCell.swift; sourceTree = "<group>"; };
 		2CEE914B2E2490290025992F /* NestedCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NestedCollectionViewCell.xib; sourceTree = "<group>"; };
+		6F7EA58D5DC1ADC9956ACCDB /* Pods_EF25HealthApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EF25HealthApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF1D77C8D8CEDF167EECE8CA /* Pods-EF25HealthApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EF25HealthApp.debug.xcconfig"; path = "Target Support Files/Pods-EF25HealthApp/Pods-EF25HealthApp.debug.xcconfig"; sourceTree = "<group>"; };
+		F590F3EFA94637B02D7112EB /* Pods-EF25HealthApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EF25HealthApp.release.xcconfig"; path = "Target Support Files/Pods-EF25HealthApp/Pods-EF25HealthApp.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF34F4F7BD19C28B798EF3C1 /* Pods_EF25HealthApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +129,8 @@
 			children = (
 				2C86F7352E17609500003D84 /* EF25HealthApp */,
 				2C86F7152E17605D00003D84 /* Products */,
+				2F62A941319E5F3AFC3C215A /* Pods */,
+				3AD6051B8C9F4F0EEC3540B2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -162,6 +175,7 @@
 		2C86F73E2E1761CD00003D84 /* Report */ = {
 			isa = PBXGroup;
 			children = (
+				2CE2A4282E4B2E6000DBF3AF /* Manager */,
 				2C86F7C82E1AF44F00003D84 /* HealthGuruObject */,
 				2C86F7B72E1AF23A00003D84 /* ReportVC */,
 				2C86F7B82E1AF24700003D84 /* InputVC */,
@@ -258,6 +272,8 @@
 			children = (
 				2C86F7A42E17F75800003D84 /* CustomView.swift */,
 				2C86F7A52E17F75800003D84 /* CustomView.xib */,
+				2C91A2152E4C36110026A073 /* DeleteAlertVC.swift */,
+				2C91A2162E4C36110026A073 /* DeleteAlertVC.xib */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -361,6 +377,14 @@
 			path = LifeCycle;
 			sourceTree = "<group>";
 		};
+		2CE2A4282E4B2E6000DBF3AF /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				2CE2A4292E4B2E7200DBF3AF /* RealmManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		2CEE91422E248D220025992F /* IntroVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -381,6 +405,23 @@
 			path = NestedCollectionView;
 			sourceTree = "<group>";
 		};
+		2F62A941319E5F3AFC3C215A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CF1D77C8D8CEDF167EECE8CA /* Pods-EF25HealthApp.debug.xcconfig */,
+				F590F3EFA94637B02D7112EB /* Pods-EF25HealthApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		3AD6051B8C9F4F0EEC3540B2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6F7EA58D5DC1ADC9956ACCDB /* Pods_EF25HealthApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -388,17 +429,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2C86F7272E17605F00003D84 /* Build configuration list for PBXNativeTarget "EF25HealthApp" */;
 			buildPhases = (
+				43DA65A9AFF9052612D9B1D0 /* [CP] Check Pods Manifest.lock */,
 				2C86F7102E17605D00003D84 /* Sources */,
 				2C86F7112E17605D00003D84 /* Frameworks */,
 				2C86F7122E17605D00003D84 /* Resources */,
+				C46C6C13D114E2C7D172DE25 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = EF25HealthApp;
-			packageProductDependencies = (
-			);
 			productName = EF25HealthApp;
 			productReference = 2C86F7142E17605D00003D84 /* EF25HealthApp.app */;
 			productType = "com.apple.product-type.application";
@@ -448,6 +489,7 @@
 				2C86F7A32E17F73900003D84 /* InformationVC.xib in Resources */,
 				2C86F7B62E1AAB3700003D84 /* ReportVC.xib in Resources */,
 				2C86F7C52E1AF34100003D84 /* TrackDailyCell.xib in Resources */,
+				2C91A2172E4C36110026A073 /* DeleteAlertVC.xib in Resources */,
 				2C86F7362E17609500003D84 /* Assets.xcassets in Resources */,
 				2C86F7A82E17F75800003D84 /* CustomView.xib in Resources */,
 				2C86F7542E176C9E00003D84 /* CollectionViewCell.xib in Resources */,
@@ -465,6 +507,52 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		43DA65A9AFF9052612D9B1D0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EF25HealthApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C46C6C13D114E2C7D172DE25 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EF25HealthApp/Pods-EF25HealthApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EF25HealthApp/Pods-EF25HealthApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EF25HealthApp/Pods-EF25HealthApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2C86F7102E17605D00003D84 /* Sources */ = {
@@ -484,6 +572,7 @@
 				2C86F7B52E1AAB3700003D84 /* ReportVC.swift in Sources */,
 				2C86F7AE2E17F87C00003D84 /* ProfileObject.swift in Sources */,
 				2C86F73B2E17609500003D84 /* SceneDelegate.swift in Sources */,
+				2CE2A42A2E4B2E7800DBF3AF /* RealmManager.swift in Sources */,
 				2C86F7712E17E24E00003D84 /* SettingsCell.swift in Sources */,
 				2C86F7BB2E1AF26B00003D84 /* InputVC.swift in Sources */,
 				2C86F79D2E17E5F700003D84 /* SettingsCellObject.swift in Sources */,
@@ -491,6 +580,7 @@
 				2C86F75A2E17782900003D84 /* FourthVC.swift in Sources */,
 				2C86F7CA2E1AF46400003D84 /* HealthGuruObject.swift in Sources */,
 				2C86F7C42E1AF34100003D84 /* TrackDailyCell.swift in Sources */,
+				2C91A2182E4C36110026A073 /* DeleteAlertVC.swift in Sources */,
 				2C86F7A22E17F73900003D84 /* InformationVC.swift in Sources */,
 				2C86F7C02E1AF31F00003D84 /* ReportCell.swift in Sources */,
 				2C86F73C2E17609500003D84 /* ViewController.swift in Sources */,
@@ -523,6 +613,7 @@
 /* Begin XCBuildConfiguration section */
 		2C86F7282E17605F00003D84 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CF1D77C8D8CEDF167EECE8CA /* Pods-EF25HealthApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -554,6 +645,7 @@
 		};
 		2C86F7292E17605F00003D84 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F590F3EFA94637B02D7112EB /* Pods-EF25HealthApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -620,7 +712,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -683,7 +775,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

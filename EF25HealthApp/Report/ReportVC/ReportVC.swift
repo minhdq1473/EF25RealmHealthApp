@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ReportVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -15,8 +16,18 @@ class ReportVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadData()
         setUpTableView()
         setUpTitle()
+        updateBackgroundView()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        loadData()
+    }
+    
+    func loadData() {
+        log = RealmManager.shared.getLogs()
+        tableView.reloadData()
         updateBackgroundView()
     }
     
@@ -68,7 +79,7 @@ class ReportVC: UIViewController {
     
     @IBAction func heartButtonTapped(_ sender: UIButton) {
         let vc = InputVC()
-        vc.inputDelegate = self
+//        vc.inputDelegate = self
         let navController = UINavigationController(rootViewController: vc)
         navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true)
@@ -86,16 +97,30 @@ extension ReportVC: UITableViewDataSource {
         cell.configure(log: healthData)
         return cell
     }
-}
-
-extension ReportVC: UITableViewDelegate {
     
 }
 
-extension ReportVC: InputVCDelegate {
-    func update(_ log: HealthGuru) {
-        self.log.append(log)
-        tableView.reloadData()
-        updateBackgroundView()
+extension ReportVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let alert = DeleteAlertVC()
+        alert.yesAction = { [weak self] in
+            guard let self else { return }
+            RealmManager.shared.remove(id: log[indexPath.row].id)
+            log.remove(at: indexPath.row)
+            loadData()
+        }
+
+        present(alert, animated: true)
+        
     }
+
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            RealmManager.shared.remove(id: log[indexPath.row].id)
+//            log.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//            updateBackgroundView()
+//        }
+//    }
 }
+

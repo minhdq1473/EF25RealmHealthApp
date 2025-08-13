@@ -23,8 +23,8 @@ class NestedCollectionViewCell: UICollectionViewCell {
         nestedCollectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CollectionViewCell")
         nestedCollectionView.delegate = self
         nestedCollectionView.dataSource = self
+//        nestedCollectionView.contentInset = .init(top: 0, left: 16, bottom: 0, right: 16)
         nestedCollectionView.allowsMultipleSelection = true
-
     }
     
     func configure(with items: [collectionCellItem], selectedItems: [Int], selectionCallback: @escaping ([Int]) -> Void) {
@@ -70,17 +70,17 @@ extension NestedCollectionViewCell: UICollectionViewDelegate {
 
 extension NestedCollectionViewCell: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (collectionView.frame.width - 31) / 2
+        let width = (collectionView.frame.width - 16) / 2
         return CGSize(width: width, height: 195)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacing: CGFloat) -> CGFloat {
-        return 16
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacing: CGFloat) -> CGFloat {
-        return 16
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacing: CGFloat) -> CGFloat {
+//        return 16
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacing: CGFloat) -> CGFloat {
+//        return 16
+//    }
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 //        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)

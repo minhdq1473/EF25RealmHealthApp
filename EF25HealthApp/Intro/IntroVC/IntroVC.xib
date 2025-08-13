@@ -33,7 +33,7 @@
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="mSq-j6-QWK">
                             <rect key="frame" x="0.0" y="55.333333333333343" width="362" height="438.66666666666663"/>
                             <color key="backgroundColor" name="Background"/>
-                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="16" sectionInsetReference="layoutMargins" id="1vr-Ac-rXb">
+                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="16" minimumInteritemSpacing="16" sectionInsetReference="layoutMargins" id="1vr-Ac-rXb">
                                 <size key="itemSize" width="362" height="406"/>
                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>

@@ -28,6 +28,9 @@ class IntroVC: UIViewController {
         setupButton()
         setupCollectionView()
         updateTitle()
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
     
     // nếu ko có hàm này, cell đầu (collection view đầu) của em sẽ hơi lệch bên phải
@@ -38,13 +41,13 @@ class IntroVC: UIViewController {
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
         }
     }
-    
+
     @IBAction func continueBtnTapped(_ sender: UIButton) {
         if currentPage < 2 {
             currentPage += 1
             let indexPath = IndexPath(item: currentPage, section: 0)
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-//            collectionView.reloadData()
+            collectionView.reloadData()
             updateTitle()
             updateButtonState()
         } else {
@@ -76,9 +79,6 @@ class IntroVC: UIViewController {
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isScrollEnabled = false
-        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            layout.scrollDirection = .horizontal
-        }
     }
     
     private func updateTitle() {
@@ -115,18 +115,6 @@ extension IntroVC: UICollectionViewDataSource {
 extension IntroVC: UICollectionViewDelegate {
     
 }
-//extension IntroVC: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacing: CGFloat) -> CGFloat {
-//        return 0
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacing: CGFloat) -> CGFloat {
-//        return 0
-//    }
-//}
+
 
 
