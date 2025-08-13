@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 
 extension ProfileVC: ResultDelegate {
@@ -35,7 +36,7 @@ class ProfileVC: UIViewController, UIGestureRecognizerDelegate {
         setupUI()
         setupBarButton()
         setupSwipeGesture()
-        setupDataFlow()
+        setupData()
     }
     
     func setupTitle() {
@@ -63,25 +64,21 @@ class ProfileVC: UIViewController, UIGestureRecognizerDelegate {
         self.navigationController?.interactivePopGestureRecognizer?.addTarget(self, action: #selector(swipeleft))
     }
     
-    func setupDataFlow() {
-        if let data = UserDefaults.standard.data(forKey: "userProfile"),
-            let profile = try? JSONDecoder().decode(Profile.self, from: data) {
+    func setupData() {
+        if let profile = ProfileRealmManager.shared.getProfile() {
             self.profile = profile
             configProfile()
         }
     }
     
     @objc func swipeleft(sender: UISwipeGestureRecognizer) {
-        print("Swipe Left")
         tabBarController?.isTabBarHidden = false
     }
    
-    
     @objc func backButtonTapped() {
         navigationController?.popToRootViewController(animated: true)
         tabBarController?.isTabBarHidden = false
     }
-    
     
     @objc func editButtonTapped() {
         let vc = InformationVC()

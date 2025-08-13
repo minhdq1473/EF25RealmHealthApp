@@ -123,9 +123,9 @@ extension SettingsVC: UITableViewDataSource {
 
 extension SettingsVC: ResultDelegate {
     func update(_ profile: Profile) {
-        if let encoded = try? JSONEncoder().encode(profile) {
-            UserDefaults.standard.set(encoded, forKey: "userProfile")
-        }
+        // Profile is now saved directly to Realm in InformationVC
+        // This delegate method is kept for interface compatibility
+        // but no additional action is needed here
     }
 }
 

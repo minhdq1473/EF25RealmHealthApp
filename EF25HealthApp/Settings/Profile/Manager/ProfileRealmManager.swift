@@ -21,6 +21,8 @@ class ProfileRealmManager {
     }
     
     func save(_ firstName: String, _ lastName: String, _ gender: String, _ weight: Double, _ height: Double) {
+        delete()
+        
         let profile = Profile()
         profile.firstName = firstName
         profile.lastName = lastName
@@ -48,20 +50,8 @@ class ProfileRealmManager {
         }
     }
     
-    func update(id: ObjectId, pulse: Int, hrv: Int) {
-        guard let profile = realm.objects(Profile.self).first else { return }
-
-        do {
-            try realm.write {
-                
-            }
-        } catch {
-            print(error)
-        }
-    }
-    
-    func getProfile() -> Profile {
-        let profile = realm.objects(Profile.self).first
-        return profile
+    func getProfile() -> Profile? {
+        return realm.objects(Profile.self).first
     }
 }
+

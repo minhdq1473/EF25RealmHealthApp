@@ -26,7 +26,7 @@ class ReportVC: UIViewController {
     }
     
     func loadData() {
-        log = RealmManager.shared.getLogs()
+        log = LogRealmManager.shared.getLogs()
         tableView.reloadData()
         updateBackgroundView()
     }
@@ -102,16 +102,39 @@ extension ReportVC: UITableViewDataSource {
 
 extension ReportVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let alert = DeleteAlertVC()
-        alert.yesAction = { [weak self] in
-            guard let self else { return }
-            RealmManager.shared.remove(id: log[indexPath.row].id)
-            log.remove(at: indexPath.row)
-            loadData()
-        }
-
-        present(alert, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
         
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let editAction = UIAlertAction(title: "Edit", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            
+            let vc = InputVC()
+            vc.editingLog = self.log[indexPath.row]
+            
+            let navController = UINavigationController(rootViewController: vc)
+            navController.modalPresentationStyle = .fullScreen
+            self.present(navController, animated: true)
+        }
+        
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+            guard let self = self else { return }
+            
+            let alert = DeleteAlertVC()
+            alert.yesAction = {
+                LogRealmManager.shared.remove(id: self.log[indexPath.row].id)
+                self.loadData()
+            }
+            self.present(alert, animated: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        actionSheet.addAction(editAction)
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(cancelAction)
+        
+        present(actionSheet, animated: true)
     }
 
 //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -122,5 +145,49 @@ extension ReportVC: UITableViewDelegate {
 //            updateBackgroundView()
 //        }
 //    }
+    
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: nil) { _, _, completion in
+            let alert = DeleteAlertVC()
+            alert.yesAction = { [weak self] in
+                guard let self else { return }
+                LogRealmManager.shared.remove(id: log[indexPath.row].id)
+                loadData()
+            }
+            self.present(alert, animated: true)
+            completion(true)
+        }
+        deleteAction.image = UIImage(systemName: "trash.fill")?.withTintColor(.primary1, renderingMode: .alwaysOriginal)
+        deleteAction.backgroundColor = .background
+        
+        
+        
+        let config = UISwipeActionsConfiguration(actions: [deleteAction])
+        return config
+    }
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let editAction = UIContextualAction(style: .destructive, title: nil) { [weak self] _, _, completion in
+            guard let self = self else {
+                completion(false)
+                return
+            }
+            
+            let vc = InputVC()
+            vc.editingLog = self.log[indexPath.row]
+            
+            let navController = UINavigationController(rootViewController: vc)
+            navController.modalPresentationStyle = .fullScreen
+            self.present(navController, animated: true)
+            
+            completion(true)
+        }
+        editAction.image = UIImage(systemName: "pencil.circle.fill")?.withTintColor(.systemCyan, renderingMode: .alwaysOriginal)
+        editAction.backgroundColor = .background
+        
+        let config = UISwipeActionsConfiguration(actions: [editAction])
+        return config
+    }
 }
 

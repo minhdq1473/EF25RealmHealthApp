@@ -16,6 +16,12 @@ class InputVC: UIViewController {
     @IBOutlet weak var view1: CustomView!
     @IBOutlet weak var view2: CustomView!
     
+    var editingLog: HealthGuru?
+    var isEditingMode: Bool {
+        editingLog != nil
+    }
+    
+
 //    var inputDelegate: InputVCDelegate?
     
     override func viewDidLoad() {
@@ -24,11 +30,22 @@ class InputVC: UIViewController {
         setupText()
         setupButton()
         setupDismissButton()
+        
+        if let log = editingLog {
+            view1.text.text = String(log.pulse)
+            view2.text.text = String(log.HRV)
+            textFieldDidChange(view1.text)
+        }
     }
     
     @IBAction func addButtonTapped(_ sender: UIButton) {
         guard let pulse = view1.validateValue(max: 200), let hrv = view2.validateValue(max: 200) else {return}
-        RealmManager.shared.add(pulse: pulse, hrv: hrv)
+        
+        if let log = editingLog {
+            LogRealmManager.shared.update(id: log.id, pulse: pulse, hrv: hrv)
+        } else {
+            LogRealmManager.shared.add(pulse: pulse, hrv: hrv)
+        }
         
 //        let log = HealthGuru(pulse: pulse, HRV: hrv)
 //        inputDelegate?.update(log)
@@ -36,7 +53,7 @@ class InputVC: UIViewController {
     }
     
     func setupTitle() {
-        title = "Information"
+        title = isEditingMode ? "Edit Information" : "Information"
     }
     
     func setupText() {
@@ -47,7 +64,7 @@ class InputVC: UIViewController {
     }
     
     func setupButton() {
-        addButton.setTitle("Add", for: .normal)
+        addButton.setTitle(isEditingMode ? "Save" : "Add", for: .normal)
         addButton.tintColor = .neutral5
         addButton.layer.cornerRadius = 16
         addButton.layer.masksToBounds = true
@@ -73,15 +90,5 @@ class InputVC: UIViewController {
         
         addButton.isEnabled = pulseValid && hrvValid
         addButton.backgroundColor = addButton.isEnabled ? .primary1 : .neutral3
-        
-//        let pulseText = view1.text!
-//        let hrvText = view2.text!
-//        if !pulseText.text!.isEmpty && !hrvText.text!.isEmpty {
-//            addButton.isEnabled = true
-//            addButton.backgroundColor = .primary1
-//        } else {
-//            addButton.isEnabled = false
-//            addButton.backgroundColor = .neutral3
-//        }
     }
 }

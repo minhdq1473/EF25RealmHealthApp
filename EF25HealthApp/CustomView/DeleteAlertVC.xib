@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DeleteAlertVC" customModule="EF25NavigationApp" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DeleteAlertVC" customModule="EF25HealthApp" customModuleProvider="target">
             <connections>
                 <outlet property="cancelBtn" destination="P4o-Da-mpN" id="ej1-cI-lES"/>
                 <outlet property="messageLabel" destination="GjW-Lg-szg" id="4Ro-OK-lxh"/>
@@ -32,8 +32,8 @@
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="f4b-oI-yf4">
                                     <rect key="frame" x="0.0" y="0.0" width="329" height="49"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Delete Profile" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41W-cM-LJa">
-                                            <rect key="frame" x="104.33333333333334" y="0.0" width="120.66666666666666" height="24"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Delete Log" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41W-cM-LJa">
+                                            <rect key="frame" x="116.33333333333334" y="0.0" width="96.666666666666657" height="24"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                             <color key="textColor" name="Neutral1"/>
                                             <nil key="highlightedColor"/>

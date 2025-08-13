@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol ResultDelegate: AnyObject {
     func update(_ profile: Profile)
@@ -34,18 +35,16 @@ class InformationVC: UIViewController, UIGestureRecognizerDelegate {
     
     @IBAction func saveButton(_ sender: UIButton) {
         guard let firstName = view1.getTextValue(), let lastName = view2.getTextValue(), let kg = view3.getTextValue(), let cm = view4.getTextValue() else { return }
-        //        let firstName = view1.text!
-        //        let lastName = view2.text!
-        //        let kg = view3.text!
-        //        let cm = view4.text!
-        //        let firstNameValue: String = firstName.text!
-        //        let lastNameValue: String = lastName.text!
+        
         let genderValue: String = gender.titleForSegment(at: gender.selectedSegmentIndex) ?? "Male"
         let kgValue = Double(kg) ?? 0
         let cmValue = Double(cm) ?? 0
         
-        let profile = Profile(firstName: firstName, lastName: lastName, gender: genderValue, weight: kgValue, height: cmValue)
-        delegate?.update(profile)
+        ProfileRealmManager.shared.save(firstName, lastName, genderValue, kgValue, cmValue)
+        
+        if let savedProfile = ProfileRealmManager.shared.getProfile() {
+            delegate?.update(savedProfile)
+        }
         
         if UserDefaults.standard.bool(forKey: "hasProfile") == false {
             UserDefaults.standard.set(true, forKey: "hasProfile")
@@ -126,15 +125,5 @@ class InformationVC: UIViewController, UIGestureRecognizerDelegate {
         
         saveButton.isEnabled = firstNameValid && lastNameValid && weightValid && heightValid
         saveButton.backgroundColor = saveButton.isEnabled ? .primary1 : .neutral3
-        //        let firstName = view1.text!
-        //        let lastName = view2.text!
-        //        let kg = view3.text!
-        //        let cm = view4.text!
-        //        if !firstName.text!.isEmpty && !lastName.text!.isEmpty && !kg.text!.isEmpty && !cm.text!.isEmpty {
-        //            saveButton.backgroundColor = .primary1
-        //        } else {
-        //            saveButton.isEnabled = false
-        //            saveButton.backgroundColor = .neutral3
-        //        }
     }
 }

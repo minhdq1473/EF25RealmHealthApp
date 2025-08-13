@@ -49,7 +49,8 @@
 		2C86F7D12E1B357100003D84 /* TabBarAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C86F7D02E1B357100003D84 /* TabBarAppearance.swift */; };
 		2C91A2172E4C36110026A073 /* DeleteAlertVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C91A2162E4C36110026A073 /* DeleteAlertVC.xib */; };
 		2C91A2182E4C36110026A073 /* DeleteAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91A2152E4C36110026A073 /* DeleteAlertVC.swift */; };
-		2CE2A42A2E4B2E7800DBF3AF /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE2A4292E4B2E7200DBF3AF /* RealmManager.swift */; };
+		2C91A21B2E4C800B0026A073 /* ProfileRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91A21A2E4C80040026A073 /* ProfileRealmManager.swift */; };
+		2CE2A42A2E4B2E7800DBF3AF /* LogRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE2A4292E4B2E7200DBF3AF /* LogRealmManager.swift */; };
 		2CEE91452E248D840025992F /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEE91432E248D840025992F /* IntroVC.swift */; };
 		2CEE91482E248F120025992F /* IntroVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CEE91472E248F120025992F /* IntroVC.xib */; };
 		2CEE914C2E2490290025992F /* NestedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEE914A2E2490290025992F /* NestedCollectionViewCell.swift */; };
@@ -102,7 +103,8 @@
 		2C86F7D02E1B357100003D84 /* TabBarAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarAppearance.swift; sourceTree = "<group>"; };
 		2C91A2152E4C36110026A073 /* DeleteAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAlertVC.swift; sourceTree = "<group>"; };
 		2C91A2162E4C36110026A073 /* DeleteAlertVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeleteAlertVC.xib; sourceTree = "<group>"; };
-		2CE2A4292E4B2E7200DBF3AF /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		2C91A21A2E4C80040026A073 /* ProfileRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRealmManager.swift; sourceTree = "<group>"; };
+		2CE2A4292E4B2E7200DBF3AF /* LogRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRealmManager.swift; sourceTree = "<group>"; };
 		2CEE91432E248D840025992F /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
 		2CEE91472E248F120025992F /* IntroVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntroVC.xib; sourceTree = "<group>"; };
 		2CEE914A2E2490290025992F /* NestedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 		2C86F79F2E17F6CC00003D84 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				2C91A2192E4C7FB80026A073 /* Manager */,
 				2C86F7AC2E17F83F00003D84 /* ProfileVC */,
 				2C86F7AB2E17F7B800003D84 /* InformationVC */,
 			);
@@ -360,6 +363,14 @@
 			path = TabBarController;
 			sourceTree = "<group>";
 		};
+		2C91A2192E4C7FB80026A073 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				2C91A21A2E4C80040026A073 /* ProfileRealmManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		2CD0678B2E26C0F500B7E59B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,7 +391,7 @@
 		2CE2A4282E4B2E6000DBF3AF /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				2CE2A4292E4B2E7200DBF3AF /* RealmManager.swift */,
+				2CE2A4292E4B2E7200DBF3AF /* LogRealmManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -572,7 +583,7 @@
 				2C86F7B52E1AAB3700003D84 /* ReportVC.swift in Sources */,
 				2C86F7AE2E17F87C00003D84 /* ProfileObject.swift in Sources */,
 				2C86F73B2E17609500003D84 /* SceneDelegate.swift in Sources */,
-				2CE2A42A2E4B2E7800DBF3AF /* RealmManager.swift in Sources */,
+				2CE2A42A2E4B2E7800DBF3AF /* LogRealmManager.swift in Sources */,
 				2C86F7712E17E24E00003D84 /* SettingsCell.swift in Sources */,
 				2C86F7BB2E1AF26B00003D84 /* InputVC.swift in Sources */,
 				2C86F79D2E17E5F700003D84 /* SettingsCellObject.swift in Sources */,
@@ -580,6 +591,7 @@
 				2C86F75A2E17782900003D84 /* FourthVC.swift in Sources */,
 				2C86F7CA2E1AF46400003D84 /* HealthGuruObject.swift in Sources */,
 				2C86F7C42E1AF34100003D84 /* TrackDailyCell.swift in Sources */,
+				2C91A21B2E4C800B0026A073 /* ProfileRealmManager.swift in Sources */,
 				2C91A2182E4C36110026A073 /* DeleteAlertVC.swift in Sources */,
 				2C86F7A22E17F73900003D84 /* InformationVC.swift in Sources */,
 				2C86F7C02E1AF31F00003D84 /* ReportCell.swift in Sources */,
