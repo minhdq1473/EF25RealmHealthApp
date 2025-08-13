@@ -51,7 +51,6 @@ extension SettingsVC: UITableViewDataSource {
                 navigationController?.pushViewController(profileVC, animated: true)
                 tabBarController?.isTabBarHidden = true
             } else {
-                infoVC.delegate = self
                 navigationController?.pushViewController(infoVC, animated: true)
                 tabBarController?.isTabBarHidden = true
             }
@@ -121,11 +120,5 @@ extension SettingsVC: UITableViewDataSource {
     }
 }
 
-extension SettingsVC: ResultDelegate {
-    func update(_ profile: Profile) {
-        // Profile is now saved directly to Realm in InformationVC
-        // This delegate method is kept for interface compatibility
-        // but no additional action is needed here
-    }
-}
+
 
