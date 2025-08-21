@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C20ACB32E55B7AE00848C00 /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20ACB12E55B7AE00848C00 /* ActivityCell.swift */; };
+		2C20ACB42E55B7AE00848C00 /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2C20ACB22E55B7AE00848C00 /* ActivityCell.xib */; };
+		2C20ACB62E55B84A00848C00 /* ActivityItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C20ACB52E55B83B00848C00 /* ActivityItem.swift */; };
+		2C854B5F2E570FDB002ADAC9 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C854B5E2E570FD7002ADAC9 /* ChartView.swift */; };
 		2C86F7362E17609500003D84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2C86F72D2E17609500003D84 /* Assets.xcassets */; };
 		2C86F7382E17609500003D84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C86F7302E17609500003D84 /* LaunchScreen.storyboard */; };
 		2C86F7392E17609500003D84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2C86F7322E17609500003D84 /* Main.storyboard */; };
@@ -51,6 +55,9 @@
 		2C91A2182E4C36110026A073 /* DeleteAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91A2152E4C36110026A073 /* DeleteAlertVC.swift */; };
 		2C91A21B2E4C800B0026A073 /* ProfileRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C91A21A2E4C80040026A073 /* ProfileRealmManager.swift */; };
 		2CE2A42A2E4B2E7800DBF3AF /* LogRealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE2A4292E4B2E7200DBF3AF /* LogRealmManager.swift */; };
+		2CE64C5F2E53B73900631373 /* ActivityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE64C5D2E53B73900631373 /* ActivityVC.swift */; };
+		2CE64C602E53B73900631373 /* ActivityVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CE64C5E2E53B73900631373 /* ActivityVC.xib */; };
+		2CE64C622E53C13600631373 /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CE64C612E53C13000631373 /* HealthKitManager.swift */; };
 		2CEE91452E248D840025992F /* IntroVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEE91432E248D840025992F /* IntroVC.swift */; };
 		2CEE91482E248F120025992F /* IntroVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CEE91472E248F120025992F /* IntroVC.xib */; };
 		2CEE914C2E2490290025992F /* NestedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEE914A2E2490290025992F /* NestedCollectionViewCell.swift */; };
@@ -59,6 +66,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C20ACB12E55B7AE00848C00 /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
+		2C20ACB22E55B7AE00848C00 /* ActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
+		2C20ACB52E55B83B00848C00 /* ActivityItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityItem.swift; sourceTree = "<group>"; };
+		2C854B5E2E570FD7002ADAC9 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		2C86F7142E17605D00003D84 /* EF25HealthApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EF25HealthApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2C86F72C2E17609500003D84 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2C86F72D2E17609500003D84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -104,7 +115,11 @@
 		2C91A2152E4C36110026A073 /* DeleteAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAlertVC.swift; sourceTree = "<group>"; };
 		2C91A2162E4C36110026A073 /* DeleteAlertVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeleteAlertVC.xib; sourceTree = "<group>"; };
 		2C91A21A2E4C80040026A073 /* ProfileRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRealmManager.swift; sourceTree = "<group>"; };
+		2CDBC8672E546F480058075D /* EF25HealthApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EF25HealthApp.entitlements; sourceTree = "<group>"; };
 		2CE2A4292E4B2E7200DBF3AF /* LogRealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogRealmManager.swift; sourceTree = "<group>"; };
+		2CE64C5D2E53B73900631373 /* ActivityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityVC.swift; sourceTree = "<group>"; };
+		2CE64C5E2E53B73900631373 /* ActivityVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityVC.xib; sourceTree = "<group>"; };
+		2CE64C612E53C13000631373 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		2CEE91432E248D840025992F /* IntroVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroVC.swift; sourceTree = "<group>"; };
 		2CEE91472E248F120025992F /* IntroVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IntroVC.xib; sourceTree = "<group>"; };
 		2CEE914A2E2490290025992F /* NestedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NestedCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -147,6 +162,9 @@
 		2C86F7352E17609500003D84 /* EF25HealthApp */ = {
 			isa = PBXGroup;
 			children = (
+				2CDBC8672E546F480058075D /* EF25HealthApp.entitlements */,
+				2CE64C5A2E53B6FA00631373 /* Activity */,
+				2CE64C552E53B5B800631373 /* HealthKit */,
 				2C86F7A62E17F75800003D84 /* CustomView */,
 				2C86F73D2E1761C600003D84 /* Intro */,
 				2C86F73E2E1761CD00003D84 /* Report */,
@@ -396,6 +414,27 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		2CE64C552E53B5B800631373 /* HealthKit */ = {
+			isa = PBXGroup;
+			children = (
+				2CE64C612E53C13000631373 /* HealthKitManager.swift */,
+			);
+			path = HealthKit;
+			sourceTree = "<group>";
+		};
+		2CE64C5A2E53B6FA00631373 /* Activity */ = {
+			isa = PBXGroup;
+			children = (
+				2C854B5E2E570FD7002ADAC9 /* ChartView.swift */,
+				2C20ACB52E55B83B00848C00 /* ActivityItem.swift */,
+				2CE64C5D2E53B73900631373 /* ActivityVC.swift */,
+				2CE64C5E2E53B73900631373 /* ActivityVC.xib */,
+				2C20ACB12E55B7AE00848C00 /* ActivityCell.swift */,
+				2C20ACB22E55B7AE00848C00 /* ActivityCell.xib */,
+			);
+			path = Activity;
+			sourceTree = "<group>";
+		};
 		2CEE91422E248D220025992F /* IntroVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -494,6 +533,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C20ACB42E55B7AE00848C00 /* ActivityCell.xib in Resources */,
 				2C86F7682E17802400003D84 /* ThirdVC.xib in Resources */,
 				2C86F75B2E17782900003D84 /* FourthVC.xib in Resources */,
 				2C86F7482E17622F00003D84 /* SecondVC.xib in Resources */,
@@ -514,6 +554,7 @@
 				2C86F7392E17609500003D84 /* Main.storyboard in Resources */,
 				2C86F7B22E17F88B00003D84 /* ProfileVC.xib in Resources */,
 				2CEE91482E248F120025992F /* IntroVC.xib in Resources */,
+				2CE64C602E53B73900631373 /* ActivityVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,6 +619,8 @@
 				2CEE91452E248D840025992F /* IntroVC.swift in Sources */,
 				2C86F7A72E17F75800003D84 /* CustomView.swift in Sources */,
 				2C86F7B12E17F88B00003D84 /* ProfileVC.swift in Sources */,
+				2CE64C622E53C13600631373 /* HealthKitManager.swift in Sources */,
+				2CE64C5F2E53B73900631373 /* ActivityVC.swift in Sources */,
 				2C86F7442E17620E00003D84 /* FirstVC.swift in Sources */,
 				2C86F7552E176C9E00003D84 /* CollectionViewCell.swift in Sources */,
 				2C86F7B52E1AAB3700003D84 /* ReportVC.swift in Sources */,
@@ -587,8 +630,10 @@
 				2C86F7712E17E24E00003D84 /* SettingsCell.swift in Sources */,
 				2C86F7BB2E1AF26B00003D84 /* InputVC.swift in Sources */,
 				2C86F79D2E17E5F700003D84 /* SettingsCellObject.swift in Sources */,
+				2C20ACB62E55B84A00848C00 /* ActivityItem.swift in Sources */,
 				2C86F74F2E1762AF00003D84 /* ColectionCellObject.swift in Sources */,
 				2C86F75A2E17782900003D84 /* FourthVC.swift in Sources */,
+				2C20ACB32E55B7AE00848C00 /* ActivityCell.swift in Sources */,
 				2C86F7CA2E1AF46400003D84 /* HealthGuruObject.swift in Sources */,
 				2C86F7C42E1AF34100003D84 /* TrackDailyCell.swift in Sources */,
 				2C91A21B2E4C800B0026A073 /* ProfileRealmManager.swift in Sources */,
@@ -598,6 +643,7 @@
 				2C86F73C2E17609500003D84 /* ViewController.swift in Sources */,
 				2C86F76C2E17DE8600003D84 /* SettingsVC.swift in Sources */,
 				2CEE914C2E2490290025992F /* NestedCollectionViewCell.swift in Sources */,
+				2C854B5F2E570FDB002ADAC9 /* ChartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,15 +675,20 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EF25HealthApp/EF25HealthApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZLYSMNY22A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EF25HealthApp/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "This app needs access to your health data to track your health progress";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This app needs to update your health data to save your fitness activities and measurements";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -661,15 +712,21 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = EF25HealthApp/EF25HealthApp.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ZLYSMNY22A;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EF25HealthApp/Info.plist;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "This app needs access to your health data to track your health progress";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "This app needs to update your health data to save your fitness activities and measurements";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -677,6 +734,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.EF25HealthApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

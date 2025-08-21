@@ -7,90 +7,30 @@
 
 import UIKit
 
-final class BarChartView: UIView {
-    private var points: [(Date, Double)] = []
-    private let barColor = UIColor.systemBlue
-    private let axisColor = UIColor.secondaryLabel
-    private let labelFont = UIFont.systemFont(ofSize: 10)
-     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
-    }
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        commonInit()
-    }
-    private func commonInit() {
-        backgroundColor = .clear
-        isOpaque = false
-    }
-    func setData(points: [(Date, Double)]) {
-        self.points = points
-        setNeedsDisplay()
-    }
-
-    override func draw(_ rect: CGRect) {
-        guard !points.isEmpty, let context = UIGraphicsGetCurrentContext() else { return }
-        let insetRect = rect.insetBy(dx: 8, dy: 8)
-
-        context.setStrokeColor(axisColor.cgColor)
-        context.setLineWidth(1)
-        context.move(to: CGPoint(x: insetRect.minX, y: insetRect.maxY))
-        context.addLine(to: CGPoint(x: insetRect.maxX, y: insetRect.maxY))
-        context.strokePath()
-
-        let maxValue = max(points.map { $0.1 }.max() ?? 1, 1)
-        let count = CGFloat(points.count)
-        let spacing: CGFloat = 6
-        let barWidth = max(2, (insetRect.width - spacing * (count - 1)) / count)
-        let calendar = Calendar.current
-        for (index, point) in points.enumerated() {
-            let value = CGFloat(point.1)
-            let heightRatio = value / CGFloat(maxValue)
-            let barHeight = max(1, insetRect.height * heightRatio)
-            let x = insetRect.minX + CGFloat(index) * (barWidth + spacing)
-            let y = insetRect.maxY - barHeight
-            let barRect = CGRect(x: x, y: y, width: barWidth, height: barHeight)
-            context.setFillColor(barColor.cgColor)
-            context.fill(barRect)
-
-            let weekday = calendar.component(.weekday, from: point.0)
-            let sym = calendar.shortWeekdaySymbols[(weekday - 1) % 7]
-            let text = String(sym.prefix(1)) as NSString
-            let size = text.size(withAttributes: [.font: labelFont])
-            let tx = x + (barWidth - size.width) / 2
-            let ty = insetRect.maxY + 2
-            text.draw(at: CGPoint(x: tx, y: ty), withAttributes: [.font: labelFont, .foregroundColor: axisColor])
-        }
-    }
-}
-
-final class TrendLineChartView: UIView {
-    // Public API
+final class LineChartView: UIView {
     func setData(points: [(Date, Double)]) {
         self.points = points
         rebuildLabels()
         setNeedsLayout()
     }
 
-    // MARK: - Private state
     private var points: [(Date, Double)] = []
     private let lineLayer = CAShapeLayer()
     private let fillLayer = CAShapeLayer()
     private let gridLayer = CAShapeLayer()
+    private let yGridLayer = CAShapeLayer()
     private var markerLayers: [CAShapeLayer] = []
     private var xLabels: [UILabel] = []
+    private var yLabels: [UILabel] = []
     private let titleLabel = UILabel()
     private let gradientLayer = CAGradientLayer()
+    private var lastYMax: Double = 0
 
-    // Layout constants
     private let topPadding: CGFloat = 28
     private let bottomPadding: CGFloat = 28
-    private let leftPadding: CGFloat = 12
-    private let rightPadding: CGFloat = 12
+    private let leftPadding: CGFloat = 48
+    private let rightPadding: CGFloat = 16
 
-    // MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -102,26 +42,29 @@ final class TrendLineChartView: UIView {
     }
 
     private func commonInit() {
-        backgroundColor = UIColor.systemGray6
+        backgroundColor = UIColor.neutral5
         layer.cornerRadius = 12
         layer.masksToBounds = true
 
-        // Title
         titleLabel.text = "Steps"
         titleLabel.font = .systemFont(ofSize: 14, weight: .semibold)
-        titleLabel.textColor = .label
+        titleLabel.textColor = .neutral1
         addSubview(titleLabel)
 
-        // Grid
         gridLayer.strokeColor = UIColor.systemGray3.cgColor
         gridLayer.fillColor = UIColor.clear.cgColor
         gridLayer.lineWidth = 1
         gridLayer.lineDashPattern = [2, 4]
         layer.addSublayer(gridLayer)
 
-        // Fill gradient under line
+        yGridLayer.strokeColor = UIColor.systemGray3.cgColor
+        yGridLayer.fillColor = UIColor.clear.cgColor
+        yGridLayer.lineWidth = 1
+        yGridLayer.lineDashPattern = [2, 4]
+        layer.addSublayer(yGridLayer)
+
         gradientLayer.colors = [
-            UIColor.systemBlue.withAlphaComponent(0.25).cgColor,
+            UIColor.primary1.withAlphaComponent(0.25).cgColor,
             UIColor.clear.cgColor
         ]
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0)
@@ -129,8 +72,7 @@ final class TrendLineChartView: UIView {
         gradientLayer.mask = fillLayer
         layer.addSublayer(gradientLayer)
 
-        // Line
-        lineLayer.strokeColor = UIColor.systemBlue.cgColor
+        lineLayer.strokeColor = UIColor.primary1.cgColor
         lineLayer.fillColor = UIColor.clear.cgColor
         lineLayer.lineWidth = 2
         lineLayer.lineJoin = .round
@@ -138,7 +80,6 @@ final class TrendLineChartView: UIView {
         layer.addSublayer(lineLayer)
     }
 
-    // MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
         titleLabel.frame = CGRect(x: leftPadding, y: 8, width: bounds.width - leftPadding - rightPadding, height: 18)
@@ -146,6 +87,7 @@ final class TrendLineChartView: UIView {
         drawGrid()
         drawChart()
         layoutXLabels()
+        layoutYLabels()
     }
 
     private func chartFrame() -> CGRect {
@@ -160,17 +102,26 @@ final class TrendLineChartView: UIView {
         guard rect.width > 0, rect.height > 0 else { return }
 
         let path = UIBezierPath()
-        let count = max(points.count, 7) // draw 7 vertical guides by default
+        let count = max(points.count, 7)
         for i in 0..<count {
             let x = rect.minX + (CGFloat(i) / CGFloat(max(count - 1, 1))) * rect.width
             path.move(to: CGPoint(x: x, y: rect.minY))
             path.addLine(to: CGPoint(x: x, y: rect.maxY))
         }
         gridLayer.path = path.cgPath
+
+        let yPath = UIBezierPath()
+        let ticks = 5
+        for i in 0..<ticks {
+            let t = CGFloat(i) / CGFloat(ticks - 1)
+            let y = rect.maxY - t * rect.height
+            yPath.move(to: CGPoint(x: rect.minX, y: y))
+            yPath.addLine(to: CGPoint(x: rect.maxX, y: y))
+        }
+        yGridLayer.path = yPath.cgPath
     }
 
     private func drawChart() {
-        // Clear old markers
         markerLayers.forEach { $0.removeFromSuperlayer() }
         markerLayers.removeAll()
 
@@ -181,20 +132,20 @@ final class TrendLineChartView: UIView {
             return
         }
 
-        // Values
         let values = points.map { $0.1 }
-        let maxValue = max(values.max() ?? 1, 1)
-        let minValue = min(values.min() ?? 0, 0)
-        let range = max(maxValue - minValue, 1)
+        let rawMax = max(values.max() ?? 1, 1)
+        let yMax = niceCeil(rawMax)
+        lastYMax = yMax
+        let yMin: Double = 0
+        let range = max(yMax - yMin, 1)
 
         func point(at index: Int) -> CGPoint {
             let x = rect.minX + (CGFloat(index) / CGFloat(max(points.count - 1, 1))) * rect.width
-            let normalized = (values[index] - minValue) / range
+            let normalized = (values[index] - yMin) / range
             let y = rect.minY + (1 - CGFloat(normalized)) * rect.height
             return CGPoint(x: x, y: y)
         }
 
-        // Build line path
         let linePath = UIBezierPath()
         let fillPath = UIBezierPath()
         let first = point(at: 0)
@@ -203,16 +154,8 @@ final class TrendLineChartView: UIView {
         fillPath.addLine(to: first)
 
         for i in 1..<points.count {
-            let prev = point(at: i - 1)
             let curr = point(at: i)
-            let mid = CGPoint(x: (prev.x + curr.x) / 2, y: (prev.y + curr.y) / 2)
-            if i == 1 {
-                linePath.addQuadCurve(to: mid, controlPoint: prev)
-            } else {
-                let pprev = point(at: i - 2)
-                let prevMid = CGPoint(x: (pprev.x + prev.x) / 2, y: (pprev.y + prev.y) / 2)
-                linePath.addCurve(to: mid, controlPoint1: prevMid, controlPoint2: prev)
-            }
+            linePath.addLine(to: curr)
             fillPath.addLine(to: curr)
         }
 
@@ -222,28 +165,28 @@ final class TrendLineChartView: UIView {
         lineLayer.path = linePath.cgPath
         fillLayer.path = fillPath.cgPath
 
-        // Markers (white inner, blue border)
+        rebuildYLabels(maxValue: yMax)
+
         for i in 0..<points.count {
             let p = point(at: i)
             let outer = CAShapeLayer()
             let radius: CGFloat = 4
             outer.path = UIBezierPath(ovalIn: CGRect(x: p.x - radius, y: p.y - radius, width: radius * 2, height: radius * 2)).cgPath
-            outer.fillColor = UIColor.white.cgColor
-            outer.strokeColor = UIColor.systemBlue.cgColor
+            outer.fillColor = UIColor.neutral5.cgColor
+            outer.strokeColor = UIColor.primary1.cgColor
             outer.lineWidth = 2
             layer.addSublayer(outer)
             markerLayers.append(outer)
         }
     }
-
-    // MARK: - X Labels
+    
     private func rebuildLabels() {
         xLabels.forEach { $0.removeFromSuperview() }
         xLabels.removeAll()
         guard !points.isEmpty else { return }
         let df = DateFormatter()
         df.locale = .current
-        df.setLocalizedDateFormatFromTemplate("EEE") // Fri, Sat
+        df.setLocalizedDateFormatFromTemplate("EEE")
         for (date, _) in points {
             let label = UILabel()
             label.text = df.string(from: date)
@@ -262,5 +205,52 @@ final class TrendLineChartView: UIView {
             let x = rect.minX + (CGFloat(i) / CGFloat(max(xLabels.count - 1, 1))) * rect.width
             label.frame = CGRect(x: x - 20, y: rect.maxY + 4, width: 40, height: 16)
         }
+    }
+
+    // MARK: - Y labels and helpers
+    private func rebuildYLabels(maxValue: Double) {
+        yLabels.forEach { $0.removeFromSuperview() }
+        yLabels.removeAll()
+        let ticks = 5
+        for i in 0..<ticks {
+            let label = UILabel()
+            label.text = formatSteps(maxValue * Double(i) / Double(ticks - 1))
+            label.font = .systemFont(ofSize: 11, weight: .regular)
+            label.textColor = .secondaryLabel
+            label.textAlignment = .right
+            addSubview(label)
+            yLabels.append(label)
+        }
+    }
+
+    private func layoutYLabels() {
+        let rect = chartFrame()
+        guard rect.height > 0, !yLabels.isEmpty else { return }
+        let ticks = yLabels.count
+        for i in 0..<ticks {
+            let t = CGFloat(i) / CGFloat(ticks - 1)
+            let y = rect.maxY - t * rect.height
+            yLabels[i].frame = CGRect(x: 0, y: y - 8, width: leftPadding - 6, height: 16)
+        }
+    }
+
+    private func niceCeil(_ v: Double) -> Double {
+        if v <= 1000 { return 1000 }
+        let magnitude = pow(10.0, floor(log10(v)))
+        let normalized = v / magnitude
+        let nice: Double
+        if normalized <= 1 { nice = 1 }
+        else if normalized <= 2 { nice = 2 }
+        else if normalized <= 5 { nice = 5 }
+        else { nice = 10 }
+        return nice * magnitude
+    }
+
+    private func formatSteps(_ value: Double) -> String {
+        let v = Int(round(value))
+        if v >= 1000 {
+            return String(format: "%.0f", Double(v))
+        }
+        return "\(v)"
     }
 }

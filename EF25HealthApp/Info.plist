@@ -21,5 +21,9 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSHealthShareUsageDescription</key>
+	<string>This app reads your steps, distance, active energy, exercise minutes, and body measurements to show activity insights.</string>
+	<key>NSHealthUpdateUsageDescription</key>
+	<string>This app writes your body measurements when you update your profile.</string>
 </dict>
 </plist>

@@ -6,11 +6,7 @@
 //
 
 import UIKit
-import RealmSwift
-
-protocol ResultDelegate: AnyObject {
-    func update(_ profile: Profile)
-}
+import HealthKit
 
 class InformationVC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var view1: CustomView!
@@ -20,9 +16,10 @@ class InformationVC: UIViewController, UIGestureRecognizerDelegate {
     @IBOutlet weak var gender: UISegmentedControl!
     @IBOutlet weak var saveButton: UIButton!
     
-    var delegate: ResultDelegate?
-    var editingProfile: Profile?
     var isEditingMode = false
+    var currentProfile: Profile?
+    
+    private let healthManager = HealthKitManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,32 +28,94 @@ class InformationVC: UIViewController, UIGestureRecognizerDelegate {
         setupTextField()
         setupBackButton()
         setupSwipeGesture()
+        loadCurrentProfile()
     }
     
     @IBAction func saveButton(_ sender: UIButton) {
-        guard let firstName = view1.getTextValue(), let lastName = view2.getTextValue(), let kg = view3.getTextValue(), let cm = view4.getTextValue() else { return }
+        guard let firstName = view1.getTextValue(),
+              let lastName = view2.getTextValue(),
+              let kg = view3.getTextValue(),
+              let cm = view4.getTextValue() else { return }
         
         let genderValue: String = gender.titleForSegment(at: gender.selectedSegmentIndex) ?? "Male"
         let kgValue = Double(kg) ?? 0
         let cmValue = Double(cm) ?? 0
         
-        ProfileRealmManager.shared.save(firstName, lastName, genderValue, kgValue, cmValue)
+        let age = currentProfile?.age ?? calculateAgeFromHealthKit()
         
-        if let savedProfile = ProfileRealmManager.shared.getProfile() {
-            delegate?.update(savedProfile)
+        let profile = Profile(
+            firstName: firstName,
+            lastName: lastName,
+            gender: genderValue,
+            weight: kgValue,
+            height: cmValue,
+            age: age
+        )
+        
+        healthManager.updateUserProfile(profile)
+                
+//        UserDefaults.standard.set(true, forKey: "hasProfile")
+        
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func loadCurrentProfile() {
+        if let healthKitProfile = healthManager.currentProfile {
+            currentProfile = healthKitProfile
+        } else if let data = UserDefaults.standard.data(forKey: "userProfile"),
+                  let savedProfile = try? JSONDecoder().decode(Profile.self, from: data) {
+            currentProfile = savedProfile
         }
         
-        if UserDefaults.standard.bool(forKey: "hasProfile") == false {
-            UserDefaults.standard.set(true, forKey: "hasProfile")
-            let vc = ProfileVC()
-            navigationController?.pushViewController(vc, animated: true)
-        } else {
-            navigationController?.popViewController(animated: true)
+        if let profile = currentProfile {
+            prefillForm(with: profile)
         }
+        
+        updateSaveButtonState()
+    }
+    
+    private func prefillForm(with profile: Profile) {
+        guard isViewLoaded else { return }
+        
+        view1.text.text = profile.firstName
+        view2.text.text = profile.lastName
+        view3.text.text = profile.weight > 0 ? String(format: "%.0f", profile.weight) : ""
+        view4.text.text = profile.height > 0 ? String(format: "%.0f", profile.height) : ""
+        
+        switch profile.gender.lowercased() {
+        case "male":
+            gender.selectedSegmentIndex = 0
+        case "female":
+            gender.selectedSegmentIndex = 1
+        case "other":
+            gender.selectedSegmentIndex = 2
+        default:
+            gender.selectedSegmentIndex = 0
+        }
+        
+        updateSaveButtonState()
+    }
+    
+    private func calculateAgeFromHealthKit() -> Int {
+        var calculatedAge = 0
+        let semaphore = DispatchSemaphore(value: 0)
+        
+        healthManager.fetchDateOfBirth { dateOfBirth in
+            if let dateOfBirth = dateOfBirth {
+                let calendar = Calendar.current
+                let now = Date()
+                let ageComponents = calendar.dateComponents([.year], from: dateOfBirth, to: now)
+                calculatedAge = ageComponents.year ?? 0
+            }
+            semaphore.signal()
+        }
+        
+        semaphore.wait()
+        return calculatedAge
     }
     
     func setupTitle() {
-        title = "Information"
+        title = isEditingMode ? "Edit Profile" : "Information"
     }
     
     func setupTextField() {
@@ -70,15 +129,26 @@ class InformationVC: UIViewController, UIGestureRecognizerDelegate {
         view3.text.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         view4.text.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
-        if let profile = editingProfile {
-            view1.text.text = profile.firstName
-            view2.text.text = profile.lastName
-            view3.text.text = String(Int(profile.weight))
-            view4.text.text = String(Int(profile.height))
-            gender.selectedSegmentIndex = profile.gender == "Male" ? 0 : 1
-            saveButton.isEnabled = true
-            saveButton.backgroundColor = .primary1
-        }
+        view3.text.keyboardType = .decimalPad
+        view4.text.keyboardType = .decimalPad
+        
+        addDoneToolbar(to: view3.text)
+        addDoneToolbar(to: view4.text)
+    }
+    
+    private func addDoneToolbar(to textField: UITextField) {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissKeyboard))
+        
+        toolbar.items = [flexSpace, doneButton]
+        textField.inputAccessoryView = toolbar
+    }
+    
+    @objc private func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     func setupBackButton() {
@@ -95,8 +165,9 @@ class InformationVC: UIViewController, UIGestureRecognizerDelegate {
         saveButton.backgroundColor = .neutral3
         saveButton.isEnabled = false
         saveButton.setTitleColor(.neutral5, for: .disabled)
+        saveButton.setTitleColor(.white, for: .normal)
         saveButton.titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
-        
+        saveButton.setTitle(isEditingMode ? "Update Profile" : "Save Profile", for: .normal)
     }
     
     func setupSwipeGesture() {
@@ -118,12 +189,23 @@ class InformationVC: UIViewController, UIGestureRecognizerDelegate {
     }
 
     @objc func textFieldDidChange(_ textField: UITextField) {
-        let firstNameValid = view1.getTextValue() != nil
-        let lastNameValid = view2.getTextValue() != nil
+        updateSaveButtonState()
+    }
+    
+    private func updateSaveButtonState() {
+        let firstNameValid = view1.getTextValue() != nil && !view1.getTextValue()!.isEmpty
+        let lastNameValid = view2.getTextValue() != nil && !view2.getTextValue()!.isEmpty
         let weightValid = view3.validateValue(max: 300) != nil
         let heightValid = view4.validateValue(max: 250) != nil
         
         saveButton.isEnabled = firstNameValid && lastNameValid && weightValid && heightValid
         saveButton.backgroundColor = saveButton.isEnabled ? .primary1 : .neutral3
+    }
+
+    func setCurrentProfile(_ profile: Profile) {
+        self.currentProfile = profile
+        if isViewLoaded {
+            prefillForm(with: profile)
+        }
     }
 }

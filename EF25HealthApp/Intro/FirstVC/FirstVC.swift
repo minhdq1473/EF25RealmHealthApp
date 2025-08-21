@@ -19,8 +19,23 @@ class FirstVC: UIViewController {
     }
     
     @IBAction func continueBtnTapped(_ sender: UIButton) {
-        let vc = IntroVC()
-        navigationController?.pushViewController(vc, animated: true)
+        HealthKitManager.shared.requestAuthorization { [weak self] success, error in
+            
+            DispatchQueue.main.async {
+                let vc = IntroVC()
+                self?.navigationController?.pushViewController(vc, animated: true)
+//                if success {
+//                    self?.navigationController?.pushViewController(vc, animated: true)
+//                } else {
+//                    let alert = UIAlertController(title: "HealthKit Access Denied", message: "To get the most out of this app, please enable HealthKit access in Settings > Privacy & Security > Health.", preferredStyle: .alert)
+//                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+//                        self?.navigationController?.pushViewController(vc, animated: true)
+//                    }))
+//                    self?.present(alert, animated: true)
+//                }
+            }
+        }
+        
     }
     
     func setupLabel() {

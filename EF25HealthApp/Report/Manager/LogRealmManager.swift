@@ -28,6 +28,8 @@ class LogRealmManager {
         do {
             try realm.write {
                 realm.add(log)
+                HealthKitManager.shared.savePulseBPM(Double(pulse)) { success, error in }
+                HealthKitManager.shared.saveHRVms(Double(hrv)) { success, error in }
             }
         } catch {
             print(error)

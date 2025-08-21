@@ -31,6 +31,9 @@ class InputVC: UIViewController {
         setupButton()
         setupDismissButton()
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
+        
         if let log = editingLog {
             view1.text.text = String(log.pulse)
             view2.text.text = String(log.HRV)
@@ -82,6 +85,10 @@ class InputVC: UIViewController {
     
     @objc func dismissButtonTapped() {
         dismiss(animated: true)
+    }
+    
+    @objc func hideKeyboard() {
+        view.endEditing(true)
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {

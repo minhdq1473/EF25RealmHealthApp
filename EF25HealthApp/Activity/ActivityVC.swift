@@ -1,47 +1,182 @@
 //
-//  HealthTrackingVC.swift
+//  ActivityVC.swift
 //  EF25HealthApp
 //
 //  Created by iKame Elite Fresher 2025 on 19/8/25.
 //
 
 import UIKit
+import Combine
 
-final class ActivityVC: UIViewController {
-    @IBOutlet weak var stepLabel: UILabel!
-    @IBOutlet weak var distanceLabel: UILabel!
-    @IBOutlet weak var caloriesLabel: UILabel!
+class ActivityVC: UIViewController {
     @IBOutlet weak var requestBtn: UIButton!
-    private let stepsValueLabel = UILabel()
-    private let distanceValueLabel = UILabel()
-    private let caloriesValueLabel = UILabel()
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var chartContainerView: UIView!
+
+    private var trendChartView: LineChartView?
+    private var cancellables = Set<AnyCancellable>()
     private let healthKit = HealthKitManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-//        buildUI()
-        requestAndLoad()
-        loadData()
+        setupCollectionView()
         setUpTitle()
+        setupHealthKitObservers()
+        checkHealthKitAuthorization()
+        setupChart()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        checkHealthKitAuthorization()
+    }
+    
+    private func setupHealthKitObservers() {
+        healthKit.$isAuthorized
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isAuthorized in
+                self?.handleAuthorizationChange(isAuthorized)
+            }
+            .store(in: &cancellables)
+        
+        healthKit.$todaySteps
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] steps in
+                self?.updateStepsDisplay(steps)
+            }
+            .store(in: &cancellables)
+        
+        healthKit.$todayCalories
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] calories in
+                self?.updateCaloriesDisplay(calories)
+            }
+            .store(in: &cancellables)
+        
+        healthKit.$todayDistance
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] distance in
+                self?.updateDistanceDisplay(distance)
+            }
+            .store(in: &cancellables)
+        
+        healthKit.$todayExerciseMinutes
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] minutes in
+                self?.updateExerciseDisplay(minutes)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func handleAuthorizationChange(_ isAuthorized: Bool) {
+        if isAuthorized {
+            requestBtn.isHidden = true
+            loadWeeklyChart()
+        } else {
+            showNoDataState()
+            requestBtn.isHidden = false
+        }
+    }
+    
+    private func checkHealthKitAuthorization() {
+        if healthKit.isHealthKitAvailable() {
+            healthKit.needsActivityDataAuthorization { [weak self] needsAuth in
+                DispatchQueue.main.async {
+                    if needsAuth {
+                        self?.requestBtn.isHidden = false
+                        self?.showNoDataState()
+                    } else {
+                        self?.requestBtn.isHidden = true
+                        self?.healthKit.requestAuthorization { success, _ in
+                            if success {
+                                self?.loadWeeklyChart()
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            showHealthKitNotAvailableAlert()
+            requestBtn.isHidden = true
+        }
     }
     
     @IBAction func requestBtnTapped(_ sender: UIButton) {
-        healthKit.requestAuthorization { success, error in
-            if success {
-                self.loadData()
+        let alert = UIAlertController(title: "Permissions Required", message: "To access health data, please enable permissions in Settings > Privacy & Security > Health", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { _ in
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsURL)
             }
-        }
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
     }
-//    private func setUpUnauthorizedUI() {
-//        let messageLabel = UILabel()
-//        messageLabel.text = "Health data access is not authorized."
-//        messageLabel.numberOfLines = 0
-//        messageLabel.textAlignment = .center
-//        view.addSubview(messageLabel)
-//        messageLabel.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//    }
+    
+    private func updateStepsDisplay(_ steps: Double) {
+        let formattedSteps = Int(steps).formatted()
+        activityData[0].value = formattedSteps
+        collectionView?.reloadData()
+    }
+    
+    private func updateCaloriesDisplay(_ calories: Double) {
+        let formattedCalories = Int(calories).formatted()
+        activityData[1].value = formattedCalories
+        collectionView?.reloadData()
+    }
+    
+    private func updateDistanceDisplay(_ distance: Double) {
+        let distanceKm = distance / 1000 // Convert meters to kilometers
+        let formattedDistance = String(format: "%.2f", distanceKm)
+        activityData[2].value = formattedDistance
+        collectionView?.reloadData()
+    }
+    
+    private func updateExerciseDisplay(_ minutes: Double) {
+        let formattedMinutes = Int(minutes).formatted()
+        activityData[3].value = formattedMinutes
+        collectionView?.reloadData()
+    }
+    
+    private func showNoDataState() {
+        updateStepsDisplay(0)
+        updateCaloriesDisplay(0)
+        updateDistanceDisplay(0)
+        updateExerciseDisplay(0)
+    }
+    
+    private func showHealthKitNotAvailableAlert() {
+        let alert = UIAlertController(
+            title: "HealthKit Not Available",
+            message: "HealthKit is not available on this device.",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+    
+    private func showPermissionDeniedAlert() {
+        let alert = UIAlertController(
+            title: "Permissions Required",
+            message: "To access health data, please enable permissions in Settings > Privacy & Security > Health",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Open Settings", style: .default) { _ in
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(settingsURL)
+            }
+        })
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
+    }
+    
+    private func setupCollectionView() {
+        collectionView.backgroundColor = .clear
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "ActivityCell", bundle: nil), forCellWithReuseIdentifier: "ActivityCell")
+    }
+    
+    
     func setUpTitle() {
         let titleLabel = UILabel()
         titleLabel.text = "Activity"
@@ -51,69 +186,58 @@ final class ActivityVC: UIViewController {
         titleLabel.sizeToFit()
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleLabel)
     }
-//    private func buildUI() {
-//        let stack = UIStackView()
-//        stack.axis = .vertical
-//        stack.spacing = 16
-//        stack.alignment = .fill
-//
-//        func makeRow(title: String, valueLabel: UILabel) -> UIStackView {
-//            let titleLabel = UILabel()
-//            titleLabel.text = title
-//            titleLabel.font = .systemFont(ofSize: 16, weight: .semibold)
-//            valueLabel.text = "-"
-//            valueLabel.textAlignment = .right
-//            valueLabel.font = .systemFont(ofSize: 16)
-//            let row = UIStackView(arrangedSubviews: [titleLabel, valueLabel])
-//            row.axis = .horizontal
-//            row.spacing = 8
-//            return row
-//        }
-//
-//        let stepsRow = makeRow(title: "Steps Today", valueLabel: stepsValueLabel)
-//        let distanceRow = makeRow(title: "Distance Today", valueLabel: distanceValueLabel)
-//        let caloriesRow = makeRow(title: "Active Energy Today", valueLabel: caloriesValueLabel)
-//
-//        [stepsRow, distanceRow, caloriesRow].forEach { stack.addArrangedSubview($0) }
-//
-//        let container = UIStackView(arrangedSubviews: [stack])
-//        container.axis = .vertical
-//        container.spacing = 0
-//        container.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(container)
-//        NSLayoutConstraint.activate([
-//            container.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-//            container.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-//            container.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20)
-//        ])
-//    }
-//
-    private func requestAndLoad() {
-        HealthKitManager.shared.requestAuthorization { [weak self] granted, _ in
-            guard let self else { return }
-            if !granted {
-                self.stepLabel.text = "Permission denied"
-                self.distanceLabel.text = "Permission denied"
-                self.caloriesLabel.text = "Permission denied"
-                self.requestBtn.isHidden = false
-                return
-            }
-            self.requestBtn.isHidden = true
-            self.loadData()
-        }
+
+    
+
+    private func setupChart() {
+        let chart = LineChartView()
+        chart.translatesAutoresizingMaskIntoConstraints = false
+        chartContainerView.addSubview(chart)
+        NSLayoutConstraint.activate([
+            chart.leadingAnchor.constraint(equalTo: chartContainerView.leadingAnchor),
+            chart.trailingAnchor.constraint(equalTo: chartContainerView.trailingAnchor),
+            chart.topAnchor.constraint(equalTo: chartContainerView.topAnchor),
+            chart.bottomAnchor.constraint(equalTo: chartContainerView.bottomAnchor)
+        ])
+        trendChartView = chart
+        loadWeeklyChart()
     }
 
-    private func loadData() {
-        HealthKitManager.shared.fetchTodaySteps { [weak self] steps in
-            self?.stepLabel.text = String(Int(steps))
-        }
-        HealthKitManager.shared.fetchTodayDistanceMeters { [weak self] meters in
-            let km = meters / 1000.0
-            self?.distanceLabel.text = String(format: "%.2f km", km)
-        }
-        HealthKitManager.shared.fetchTodayActiveEnergyCalories { [weak self] calories in
-            self?.caloriesLabel.text = String(format: "%.0f kcal", calories)
+    private func loadWeeklyChart() {
+        HealthKitManager.shared.fetchLast7DaysSteps { [weak self] points in
+            self?.trendChartView?.setData(points: points)
         }
     }
 }
 
+extension ActivityVC: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return activityData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ActivityCell", for: indexPath) as! ActivityCell
+        let item = activityData[indexPath.item]
+        cell.configure(with: item)
+        return cell
+    }
+}
+
+extension ActivityVC: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (collectionView.bounds.width - 32) / 2
+        return CGSize(width: width, height: 128)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    }
+}
